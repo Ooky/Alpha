@@ -1,5 +1,6 @@
 package ch.coldpixel.alpha.main;
 
+import ch.coldpixel.alpha.graphics.icon.Icon;
 import com.badlogic.gdx.ApplicationAdapter;
 
 public class Main extends ApplicationAdapter {
@@ -13,7 +14,8 @@ public class Main extends ApplicationAdapter {
     public static final int WINDOW_WIDTH = 1024;
     public static final int WINDOW_HEIGTH = 512 + 128;
     public static final String GAMENAME = "Coldpixel - Alpha";
-    public static final String FAVICON = "Graphics/Icon/Icon.png";
+    private static Icon ICON;
+    public static final String FAVICON = ICON.getFAVICON();
     //FPS
     FPSLogger fps;
     Boolean showFPS;
