@@ -34,14 +34,14 @@ public class Camera {
         camera.setToOrtho(false, WINDOW_WIDTH, WINDOW_HEIGTH);
         camera.update();
     }
-
+    
     public void camUpdate(Batch batch) {
         handleInput();
         //Updates our OrthographicCamera after handleInput()!
         camera.update();
         batch.setProjectionMatrix(camera.combined);
     }
-
+    
     private void handleInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
             camera.zoom += 0.02;
@@ -67,6 +67,6 @@ public class Camera {
         if (Gdx.input.isKeyPressed(Input.Keys.P)) {
             camera.rotate(rotationSpeed, 0, 0, 1);
         }
-
+        
     }
 }

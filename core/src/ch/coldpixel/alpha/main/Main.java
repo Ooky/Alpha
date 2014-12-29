@@ -1,5 +1,6 @@
 package ch.coldpixel.alpha.main;
 
+import ch.coldpixel.alpha.level.Level;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -30,6 +31,8 @@ public class Main extends ApplicationAdapter {
     Boolean showFPS;
     //Shaperenderer
     ShapeRenderer shape;
+    //Level
+    Level level;
 //==============================================================================
 //Methods
 //==============================================================================
@@ -47,6 +50,8 @@ public class Main extends ApplicationAdapter {
         cam = new Camera();
         //Shaperenderer
         shape = new ShapeRenderer();
+        //Level
+        level = new Level(WINDOW_WIDTH * 3, WINDOW_HEIGTH);
     }
 
     @Override
@@ -78,8 +83,7 @@ public class Main extends ApplicationAdapter {
     public void background() {
         //Shapedrawing
         shape.begin(ShapeRenderer.ShapeType.Filled);
-        shape.rect(100, 200, 800, -200, Color.RED, Color.YELLOW, Color.YELLOW, Color.RED);
+        shape.rect(0, 0, level.getLevelWidth(), level.getLevelHeight(), Color.RED, Color.YELLOW, Color.YELLOW, Color.RED);
         shape.end();
-
     }
 }
