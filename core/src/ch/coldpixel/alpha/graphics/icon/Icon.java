@@ -10,9 +10,16 @@ package ch.coldpixel.alpha.graphics.icon;
  * @author Mike
  */
 public class Icon {
-    private static String FAVICON = "Graphics/Icon/Icon.png";
-  
+
+//==============================================================================
+//Initialization
+//==============================================================================
+    private static final String FAVICON = "Graphics/Icon/Icon.png";
+
+//==============================================================================
+//Methods
+//==============================================================================
     public static String getFAVICON() {
         return FAVICON;
-    }    
+    }
 }
