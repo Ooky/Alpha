@@ -2,8 +2,10 @@ package ch.coldpixel.alpha.main;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Main extends ApplicationAdapter {
 
@@ -26,6 +28,8 @@ public class Main extends ApplicationAdapter {
     //FPS
     FPSLogger fps;
     Boolean showFPS;
+    //Shaperenderer
+    ShapeRenderer shape;
 //==============================================================================
 //Methods
 //==============================================================================
@@ -33,7 +37,7 @@ public class Main extends ApplicationAdapter {
     @Override
     public void create() {
         //Player
-        player = new Player(100, 500);
+        player = new Player(100, 200);
         //FPS
         fps = new FPSLogger();
         showFPS = false;
@@ -41,6 +45,8 @@ public class Main extends ApplicationAdapter {
         batch = new SpriteBatch();
         //Camera
         cam = new Camera();
+        //Shaperenderer
+        shape = new ShapeRenderer();
     }
 
     @Override
@@ -50,6 +56,7 @@ public class Main extends ApplicationAdapter {
         //Clear the Screen
         Gdx.gl.glClearColor(0, 255, 255, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        background();
         //Batchdrawing
         batch.begin();
         batch.draw(player.texture, player.getPlayerX(), player.getPlayerY());
@@ -61,9 +68,18 @@ public class Main extends ApplicationAdapter {
             fps.log();
         }
     }
-    
+
     @Override
     public void dispose() {
+        shape.dispose();
         batch.dispose();
+    }
+
+    public void background() {
+        //Shapedrawing
+        shape.begin(ShapeRenderer.ShapeType.Filled);
+        shape.rect(100, 200, 800, -200, Color.RED, Color.YELLOW, Color.YELLOW, Color.RED);
+        shape.end();
+
     }
 }
