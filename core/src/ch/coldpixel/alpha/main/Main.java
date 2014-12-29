@@ -32,7 +32,8 @@ public class Main extends ApplicationAdapter {
 //==============================================================================
     @Override
     public void create() {
-        player = new Player();
+        //Player
+        player = new Player(100, 500);
         //FPS
         fps = new FPSLogger();
         showFPS = false;
@@ -49,11 +50,12 @@ public class Main extends ApplicationAdapter {
         //Clear the Screen
         Gdx.gl.glClearColor(0, 255, 255, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        //Batchdrawing
         batch.begin();
-        //Animation
-        batch.draw(player.getPlayerTexture(0, 0, 64, 32), 100, 100);
+        batch.draw(player.texture, player.getPlayerX(), player.getPlayerY());
         batch.end();
+        //PlayerUpdate
+        player.update();
         //FPS
         if (showFPS) {
             fps.log();
