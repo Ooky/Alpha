@@ -1,7 +1,5 @@
 package ch.coldpixel.alpha.main;
 
-import ch.coldpixel.alpha.graphics.icon.Icon;
-import ch.coldpixel.alpha.graphics.player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;

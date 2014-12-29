@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.coldpixel.alpha.graphics.wold.level;
+
+package ch.coldpixel.alpha.level;
 
 /**
- *
- * @author Mike
+ * 
+ * @author Ooky
  */
 public class placeholder {
-    
+
 }
