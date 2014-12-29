@@ -26,10 +26,10 @@ public class Main extends ApplicationAdapter {
     //FPS
     FPSLogger fps;
     Boolean showFPS;
-
 //==============================================================================
 //Methods
 //==============================================================================
+
     @Override
     public void create() {
         //Player
@@ -60,5 +60,10 @@ public class Main extends ApplicationAdapter {
         if (showFPS) {
             fps.log();
         }
+    }
+    
+    @Override
+    public void dispose() {
+        batch.dispose();
     }
 }
