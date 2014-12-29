@@ -19,6 +19,8 @@ public class Main extends ApplicationAdapter {
     public static final String FAVICON = Icon.getFAVICON();
     //Player
     private Player player;
+    //Camera
+    private Camera cam;
     //Spritebatch
     private SpriteBatch batch;
     //FPS
@@ -36,10 +38,14 @@ public class Main extends ApplicationAdapter {
         showFPS = false;
         //Spritebatch
         batch = new SpriteBatch();
+        //Camera
+        cam = new Camera();
     }
 
     @Override
     public void render() {
+        //Update the Camera
+        cam.camUpdate(batch);
         //Clear the Screen
         Gdx.gl.glClearColor(0, 255, 255, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
