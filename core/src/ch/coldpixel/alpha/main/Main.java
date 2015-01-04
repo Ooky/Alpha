@@ -62,6 +62,7 @@ public class Main extends ApplicationAdapter {
         Gdx.gl.glClearColor(0, 255, 255, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         background();
+        level.drawLevel();
         //Batchdrawing
         batch.begin();
         batch.draw(player.texture, player.getPlayerX(), player.getPlayerY());
