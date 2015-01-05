@@ -17,12 +17,13 @@ public class Background {
     private TextureRegion region;
     private Texture texture;
     
-    public Background(String texturePath,int startX,int startY,int widthX,int widthY, boolean collides){
-        texture = new Texture(Gdx.files.internal(texturePath));
-        region = new TextureRegion(texture, startX, startY, widthX, widthY);
+    public Background(){
+        texture = new Texture(Gdx.files.internal("Graphics/Background/BackgroundRegion.png"));
+        
     }
 
-    public TextureRegion getRegion() {
+    public TextureRegion getRegion(int startX,int startY,int widthX,int widthY) {
+        region = new TextureRegion(texture, startX, startY, widthX, widthY);
         return region;
     }
 }

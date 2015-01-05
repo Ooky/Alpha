@@ -20,6 +20,7 @@ public class Level {
     //Levelsize
     private final int levelWidth;
     private final int levelHeight;
+    private Background background;
     private Background groundTop;
     private Background ground;
     private SpriteBatch batch;
@@ -30,17 +31,20 @@ public class Level {
         batch = new SpriteBatch();
         this.levelWidth = levelWidth;
         this.levelHeight = levelHeight;
-        groundTop = new Background("Graphics/Background/BackgroundRegion.png",0,0,16,16,false);
-        ground= new Background("Graphics/Background/BackgroundRegion.png",0,16,16,16,false);
+        background = new Background();
+        //groundTop = new Background("Graphics/Background/BackgroundRegion.png",0,0,16,16,false);
+       // ground= new Background("Graphics/Background/BackgroundRegion.png",0,16,16,16,false);
+       // house = new Background("Graphics/Background/BackgroundRegion.png")
     }
     public void drawLevel(){
         batch.begin();
         //draw Ground
-        drawRegion(ground.getRegion(),0,0,35,2,16,16);
-        drawRegion(ground.getRegion(),640,0,35,2,16,16);
+        drawRegion(background.getRegion(0,16,16,16),0,0,35,2,16,16);
+        drawRegion(background.getRegion(0,16,16,16),640,0,35,2,16,16);
         //draw GroundTop
-        drawRegion(groundTop.getRegion(),0,32,35,1,16,16);
-        drawRegion(groundTop.getRegion(),640,32,35,1,16,16);
+        drawRegion(background.getRegion(0,0,16,16),0,32,35,1,16,16);
+        drawRegion(background.getRegion(0,0,16,16),640,32,35,1,16,16);
+        batch.draw(background.getRegion(16,0,120,120),16,48);
         batch.end();
     }
     //Drwas a Region of Textures
@@ -49,12 +53,10 @@ public class Level {
         int oldXStart=xStart;
         int oldYStart=yStart;
         while(yStart<oldYStart+yTimes*textureHeight){
-            while(xStart<oldXStart+xTimes*textureWidth){
-                System.out.println("xStart:"+xStart);                
+            while(xStart<oldXStart+xTimes*textureWidth){           
                 batch.draw(texture, xStart, yStart);
                 xStart=xStart+textureWidth;
             }
-            System.out.println("yStart:"+yStart);
             xStart=oldXStart;
             yStart=yStart+textureHeight;
         }
