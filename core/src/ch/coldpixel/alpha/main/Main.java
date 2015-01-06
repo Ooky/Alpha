@@ -63,9 +63,8 @@ public class Main extends ApplicationAdapter {
         //Update the Camera
         cam.camUpdate(level.getBatchDynamic());
         //Clear the Screen
-        Gdx.gl.glClearColor(0, 255, 255, 1);
+        Gdx.gl.glClearColor(255, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        background();
         level.drawLevel();
         //Batchdrawing
         batch.begin();
@@ -83,12 +82,5 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         shape.dispose();
         batch.dispose();
-    }
-
-    public void background() {
-        //Shapedrawing
-        shape.begin(ShapeRenderer.ShapeType.Filled);
-        shape.rect(0, 0, level.getLevelWidth(), level.getLevelHeight(), Color.RED, Color.YELLOW, Color.YELLOW, Color.RED);
-        shape.end();
     }
 }

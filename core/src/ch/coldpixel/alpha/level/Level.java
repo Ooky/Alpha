@@ -5,6 +5,7 @@
  */
 package ch.coldpixel.alpha.level;
 
+import ch.coldpixel.alpha.main.Main;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -54,7 +55,8 @@ public class Level {
 //------------------------------------------------------------------------------
         //Background
         batchStatic.begin();
-        drawRegion(true, cloud, 0, 0, levelWidth / 16, levelHeight / 16, 16, 16);
+        //Fills the whole visible Window
+        drawRegion(true, cloud, 0, -30, Main.WINDOW_WIDTH / 16, Main.WINDOW_HEIGTH / 32, 16, 32);
         batchStatic.end();
         batchDynamic.begin();
 //------------------------------------------------------------------------------
@@ -66,6 +68,7 @@ public class Level {
         drawRegion(false, groundTop, 640, 32, 35, 1, 16, 16);
         drawRegion(false, ground, 0, 0, 35, 2, 16, 16);
         drawRegion(false, ground, 640, 0, 35, 2, 16, 16);
+
         batchDynamic.end();
     }
 
@@ -104,8 +107,9 @@ public class Level {
     public SpriteBatch getBatchDynamic() {
         return batchDynamic;
     }
+
     public SpriteBatch getBatchStatic() {
         return batchStatic;
     }
-    
+
 }
