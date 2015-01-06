@@ -38,6 +38,14 @@ public class Player {
 //==============================================================================
 //Methods
 //==============================================================================
+    public Player() {
+        //PlayerSize
+        this.playerWidth = 32;
+        this.playerHeight = 64;
+        //Movement
+        this.walkSpeed = 300;
+        this.runSpeed = (int) (walkSpeed * 1.5);
+    }
     public Player(float playerX, float playerY) {
         //PlayerSize
         this.playerWidth = 32;
@@ -55,51 +63,8 @@ public class Player {
     }
 
     public void update() {
-        if (leftOrA()) {
-            if (isRunning()) {
-                runLeft();
-            } else {
-                walkLeft();
-            }
-        }
-        if (rightOrD()) {
-            if (isRunning()) {
-                runRight();
-            } else {
-                walkRight();
-            }
-        }
-    }
-
-//==============================================================================
-//Keycode
-//==============================================================================
-    private boolean leftOrA() {
-        return Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT);
-    }
-
-    private boolean rightOrD() {
-        return Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT);
-    }
-
-    private boolean isRunning() {
-        return Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT);
-    }
-
-    private void runLeft() {
-        this.setPlayerX(this.getPlayerX() - runSpeed * Gdx.graphics.getDeltaTime());
-    }
-
-    private void walkLeft() {
-        this.setPlayerX(this.getPlayerX() - walkSpeed * Gdx.graphics.getDeltaTime());
-    }
-
-    private void runRight() {
-        this.setPlayerX(this.getPlayerX() + runSpeed * Gdx.graphics.getDeltaTime());
-    }
-
-    private void walkRight() {
-        this.setPlayerX(this.getPlayerX() + walkSpeed * Gdx.graphics.getDeltaTime());
+        //Need to add PlayerAnimation here
+        //Movement is in Camera
     }
 
 //==============================================================================
@@ -119,6 +84,14 @@ public class Player {
 
     public int getPlayerHeight() {
         return playerHeight;
+    }
+
+    public float getWalkSpeed() {
+        return walkSpeed;
+    }
+
+    public float getRunSpeed() {
+        return runSpeed;
     }
 
 //==============================================================================

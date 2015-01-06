@@ -57,7 +57,7 @@ public class Main extends ApplicationAdapter {
     @Override
     public void render() {
         //Update the Camera
-        cam.camUpdate(batch);
+        cam.camUpdate(level.getBatch());
         //Clear the Screen
         Gdx.gl.glClearColor(0, 255, 255, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

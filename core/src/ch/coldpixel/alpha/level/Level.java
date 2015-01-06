@@ -45,10 +45,10 @@ public class Level {
     public void drawLevel() {
         batch.begin();
         //Background
-        drawRegion(ground, 0, 0, 35, 2, 16, 16);
-        drawRegion(ground, 640, 0, 35, 2, 16, 16);
         drawRegion(groundTop, 0, 32, 35, 1, 16, 16);
         drawRegion(groundTop, 640, 32, 35, 1, 16, 16);
+        drawRegion(ground, 0, 0, 35, 2, 16, 16);
+        drawRegion(ground, 640, 0, 35, 2, 16, 16);
         batch.end();
     }
 
@@ -70,11 +70,16 @@ public class Level {
 //==============================================================================
 //Getter
 //==============================================================================
+
     public int getLevelWidth() {
         return levelWidth;
     }
 
     public int getLevelHeight() {
         return levelHeight;
+    }
+
+    public SpriteBatch getBatch() {
+        return batch;
     }
 }
