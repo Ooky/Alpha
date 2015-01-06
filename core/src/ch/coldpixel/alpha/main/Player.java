@@ -20,8 +20,8 @@ public class Player {
 //Initialization
 //==============================================================================
     //PlayerSize
-    private final int playerWidth;
-    private final int playerHeight;
+    final int playerWidth;
+    final int playerHeight;
     //Texture
     Texture texture;
     //TextureRegion
@@ -32,6 +32,8 @@ public class Player {
     //Movement
     private final float walkSpeed;
     private final float runSpeed;
+    //Camera
+    Camera cam;
 
 //==============================================================================
 //Methods
@@ -49,6 +51,7 @@ public class Player {
         //Movement
         this.walkSpeed = 300;
         this.runSpeed = (int) (walkSpeed * 1.5);
+        this.cam = new Camera();
     }
 
     public void update() {
@@ -108,6 +111,14 @@ public class Player {
 
     public float getPlayerY() {
         return playerY;
+    }
+
+    public int getPlayerWidth() {
+        return playerWidth;
+    }
+
+    public int getPlayerHeight() {
+        return playerHeight;
     }
 
 //==============================================================================

@@ -15,34 +15,33 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class TextureLoader {
 
-    private TextureRegion region;
-    private Texture texture;
-    private TextureRegion ground;
-    private TextureRegion groundTop;
-
+//==============================================================================
+//Initialization
+//==============================================================================
+    //Background
+    private final Texture backgroundTexture;
+    private final TextureRegion ground;
+    private final TextureRegion groundTop;
     
+
 //==============================================================================
 //Methods
 //==============================================================================
-//Implements our File in the Program as a Texture
-//Set the spezific Region in our File on a variable
-public TextureLoader() {
-        texture = new Texture(Gdx.files.internal("Graphics/Background/BackgroundRegion.png"));
-
-        ground = new TextureRegion(texture,0, 16, 16, 16);
-                
-        groundTop = new TextureRegion(texture,0, 0, 16, 16);
-        
+//Defines our Textures
+    public TextureLoader() {
+        backgroundTexture = new Texture(Gdx.files.internal("Graphics/Background/BackgroundRegion.png"));
+        ground = new TextureRegion(backgroundTexture, 0, 16, 16, 16);
+        groundTop = new TextureRegion(backgroundTexture, 0, 0, 16, 16);
     }
-
-    //Gets a spezific Region for an Object
-
+//==============================================================================
+//Getter
+//==============================================================================
     public TextureRegion getGround() {
         return ground;
     }
-    
-        public TextureRegion getGroundTop() {
+
+    public TextureRegion getGroundTop() {
         return groundTop;
     }
-    
+
 }
