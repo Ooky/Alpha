@@ -21,5 +21,6 @@ public class DesktopLauncher {
             config.backgroundFPS = 0;
         }
         new LwjglApplication(new Main(), config);
+     
     }
 }
