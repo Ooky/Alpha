@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 /**
  *
- * @author Ooky
+ * @author Coldpixel
  */
 public class Camera {
 

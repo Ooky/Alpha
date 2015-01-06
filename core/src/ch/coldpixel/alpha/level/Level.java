@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  *
- * @author Ooky
+ * @author Coldpixel
  */
 public class Level {
 

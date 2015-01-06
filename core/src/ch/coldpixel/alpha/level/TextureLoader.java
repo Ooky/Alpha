@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  *
- * @author Mike
+ * @author Coldpixel
  */
 public class TextureLoader {
 

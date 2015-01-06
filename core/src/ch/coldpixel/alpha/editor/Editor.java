@@ -5,13 +5,9 @@
  */
 package ch.coldpixel.alpha.editor;
 
-import ch.coldpixel.alpha.level.*;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
 /**
  *
- * @author Dias
+ * @author Coldpixel
  */
 public class Editor {
 

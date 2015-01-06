@@ -7,8 +7,8 @@
 package ch.coldpixel.alpha.sound;
 
 /**
- * 
- * @author Ooky
+ *
+ * @author Coldpixel
  */
 public class placeholder {
 

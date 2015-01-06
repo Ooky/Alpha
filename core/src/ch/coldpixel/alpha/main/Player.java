@@ -6,13 +6,12 @@
 package ch.coldpixel.alpha.main;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  *
- * @author Mike
+ * @author Coldpixel
  */
 public class Player {
 

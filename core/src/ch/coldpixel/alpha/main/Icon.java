@@ -7,7 +7,7 @@ package ch.coldpixel.alpha.main;
 
 /**
  *
- * @author Mike
+ * @author Coldpixel
  */
 public class Icon {
 

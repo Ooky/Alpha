@@ -10,8 +10,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 
 /**
- * 
- * @author Ooky
+ *
+ * @author Coldpixel
  */
 public class FPSLogger {
     
