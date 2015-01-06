@@ -11,7 +11,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import java.awt.RenderingHints;
 
 /**
  *
@@ -47,15 +46,20 @@ public class Camera {
     }
 
     public void handleInput() {
-        //Zoom
+//------------------------------------------------------------------------------
+//Zoom
+//------------------------------------------------------------------------------
         if (Gdx.input.isKeyPressed(Keys.R)) {
             camera.zoom += 0.02;
         }
         if (Gdx.input.isKeyPressed(Keys.F)) {
             camera.zoom -= 0.02;
         }
-        //PlayerMovement
-        //The Player actually doesnt move, it just moves the cam arround
+
+//------------------------------------------------------------------------------
+//PlayerMovement
+//The Player actually doesnt move, it just moves the cam arround
+//------------------------------------------------------------------------------
         if (leftOrA()) {
             if (isRunning()) {
                 runLeft();
@@ -77,7 +81,10 @@ public class Camera {
         if (Gdx.input.isKeyPressed(Keys.W)) {
             camera.translate(0, 3, 0);
         }
-        //Rotation
+        
+//------------------------------------------------------------------------------
+//Rotation
+//------------------------------------------------------------------------------
         if (Gdx.input.isKeyPressed(Keys.E)) {
             camera.rotate(-rotationSpeed, 0, 0, 1);
         }

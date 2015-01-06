@@ -22,10 +22,12 @@ public class Level {
     private final int levelHeight;
     //Textures
     private final TextureLoader textureLoader;
+    private final TextureRegion cloud;
     private final TextureRegion ground;
     private final TextureRegion groundTop;
     //Spritebatch
-    private final SpriteBatch batch;
+    private final SpriteBatch batchDynamic;
+    private final SpriteBatch batchStatic;
 
 //==============================================================================
 //Methods
@@ -36,31 +38,51 @@ public class Level {
         this.levelHeight = levelHeight;
         //Textures
         textureLoader = new TextureLoader();
+        cloud = textureLoader.getCloud();
         ground = textureLoader.getGround();
         groundTop = textureLoader.getGroundTop();
         //Spritebatch
-        batch = new SpriteBatch();
+        batchDynamic = new SpriteBatch();
+        batchStatic = new SpriteBatch();
     }
 
     public void drawLevel() {
-        batch.begin();
+
+//------------------------------------------------------------------------------
+//Static Batch. This wont move when the player/cam moves
+//Careful, ALL booleans MUST be true
+//------------------------------------------------------------------------------
         //Background
-        drawRegion(groundTop, 0, 32, 35, 1, 16, 16);
-        drawRegion(groundTop, 640, 32, 35, 1, 16, 16);
-        drawRegion(ground, 0, 0, 35, 2, 16, 16);
-        drawRegion(ground, 640, 0, 35, 2, 16, 16);
-        batch.end();
+        batchStatic.begin();
+        drawRegion(true, cloud, 0, 0, levelWidth / 16, levelHeight / 16, 16, 16);
+        batchStatic.end();
+        batchDynamic.begin();
+//------------------------------------------------------------------------------
+//Static Batch. This wont move when the player/cam moves
+//Careful, ALL booleans MUST be false
+//------------------------------------------------------------------------------
+        //Background
+        drawRegion(false, groundTop, 0, 32, 35, 1, 16, 16);
+        drawRegion(false, groundTop, 640, 32, 35, 1, 16, 16);
+        drawRegion(false, ground, 0, 0, 35, 2, 16, 16);
+        drawRegion(false, ground, 640, 0, 35, 2, 16, 16);
+        batchDynamic.end();
     }
 
     //Parameter: Texture, StartPositionX, StartPositionY, Repeat X, Repeat Y, Texture width, Texture height
-    public void drawRegion(TextureRegion texture, int xStart, int yStart, int xTimes, int yTimes, int textureWidth, int textureHeight) {
+    public void drawRegion(boolean staticCamera, TextureRegion texture, int xStart, int yStart, int xTimes, int yTimes, int textureWidth, int textureHeight) {
         int oldXStart = xStart;
         int oldYStart = yStart;
         //The Amount of Times a Texture is drawn.
         while (yStart < oldYStart + yTimes * textureHeight) {
             while (xStart < oldXStart + xTimes * textureWidth) {
-                batch.draw(texture, xStart, yStart);
-                xStart = xStart + textureWidth;
+                if (staticCamera) {
+                    batchStatic.draw(texture, xStart, yStart);
+                    xStart = xStart + textureWidth;
+                } else {
+                    batchDynamic.draw(texture, xStart, yStart);
+                    xStart = xStart + textureWidth;
+                }
             }
             xStart = oldXStart;
             yStart = yStart + textureHeight;
@@ -79,7 +101,11 @@ public class Level {
         return levelHeight;
     }
 
-    public SpriteBatch getBatch() {
-        return batch;
+    public SpriteBatch getBatchDynamic() {
+        return batchDynamic;
     }
+    public SpriteBatch getBatchStatic() {
+        return batchStatic;
+    }
+    
 }

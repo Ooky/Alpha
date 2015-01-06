@@ -20,6 +20,7 @@ public class TextureLoader {
 //==============================================================================
     //Background
     private final Texture backgroundTexture;
+    private final TextureRegion cloud;
     private final TextureRegion ground;
     private final TextureRegion groundTop;
     
@@ -30,12 +31,17 @@ public class TextureLoader {
 //Defines our Textures
     public TextureLoader() {
         backgroundTexture = new Texture(Gdx.files.internal("Graphics/Background/BackgroundRegion.png"));
+        cloud = new TextureRegion(backgroundTexture,0,32,16,62); 
         ground = new TextureRegion(backgroundTexture, 0, 16, 16, 16);
         groundTop = new TextureRegion(backgroundTexture, 0, 0, 16, 16);
     }
+
 //==============================================================================
 //Getter
 //==============================================================================
+    public TextureRegion getCloud() {
+        return cloud;
+    }
     public TextureRegion getGround() {
         return ground;
     }
