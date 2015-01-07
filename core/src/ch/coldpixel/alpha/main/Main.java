@@ -1,12 +1,11 @@
 package ch.coldpixel.alpha.main;
 
 import ch.coldpixel.alpha.level.Level;
+import ch.coldpixel.alpha.level.TextureLoader;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 /**
  *
@@ -24,7 +23,6 @@ public class Main extends ApplicationAdapter {
     public static final int WINDOW_HEIGTH = 512 + 128;
     public static final String GAMENAME = "Coldpixel - Alpha";
     public static final String FAVICON = Icon.getFAVICON();
-    //Player
     private Player player;
     //Camera
     private Camera cam;
@@ -33,8 +31,6 @@ public class Main extends ApplicationAdapter {
     //FPS
     FPSLogger fps;
     Boolean showFPS;
-    //Shaperenderer
-    ShapeRenderer shape;
     //Level
     Level level;
 //==============================================================================
@@ -52,8 +48,6 @@ public class Main extends ApplicationAdapter {
         batch = new SpriteBatch();
         //Camera
         cam = new Camera();
-        //Shaperenderer
-        shape = new ShapeRenderer();
         //Level
         level = new Level(WINDOW_WIDTH * 3, WINDOW_HEIGTH);
     }
@@ -70,8 +64,6 @@ public class Main extends ApplicationAdapter {
         batch.begin();
         batch.draw(player.texture, player.getPlayerX(), player.getPlayerY());
         batch.end();
-        //PlayerUpdate
-        player.update();
         //FPS
         if (showFPS) {
             fps.log();
@@ -80,7 +72,9 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void dispose() {
-        shape.dispose();
+        level.getBatchStatic().dispose();
+        level.getBatchDynamic().dispose();
+        player.texture.dispose();
         batch.dispose();
     }
 }

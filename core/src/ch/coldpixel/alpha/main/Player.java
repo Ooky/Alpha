@@ -31,8 +31,6 @@ public class Player {
     //Movement
     private final float walkSpeed;
     private final float runSpeed;
-    //Camera
-    Camera cam;
 
 //==============================================================================
 //Methods
@@ -45,25 +43,25 @@ public class Player {
         this.walkSpeed = 300;
         this.runSpeed = (int) (walkSpeed * 1.5);
     }
+
     public Player(float playerX, float playerY) {
         //PlayerSize
         this.playerWidth = 32;
         this.playerHeight = 64;
         //Texture
         texture = new Texture(Gdx.files.internal("Graphics/Player/player.png"));
-//        TextureRegion
+        //TextureRegion
+        this.playerTexture = new TextureRegion(texture, this.playerX, this.playerY, playerWidth, playerHeight);
+        //Position
         this.playerX = playerX;
         this.playerY = playerY;
-        this.playerTexture = new TextureRegion(texture, this.playerX, this.playerY, playerWidth, playerHeight);
         //Movement
         this.walkSpeed = 300;
         this.runSpeed = (int) (walkSpeed * 1.5);
-        this.cam = new Camera();
     }
 
     public void update() {
-        //Need to add PlayerAnimation here
-        //Movement is in Camera
+        //Todo
     }
 
 //==============================================================================

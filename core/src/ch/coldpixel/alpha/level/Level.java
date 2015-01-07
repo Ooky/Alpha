@@ -6,6 +6,7 @@
 package ch.coldpixel.alpha.level;
 
 import ch.coldpixel.alpha.main.Main;
+import ch.coldpixel.alpha.npc.Enemy;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -21,7 +22,7 @@ public class Level {
     //Levelsize
     private final int levelWidth;
     private final int levelHeight;
-    //Textures
+    //Background
     private final TextureLoader textureLoader;
     private final TextureRegion cloud;
     private final TextureRegion ground;
@@ -29,6 +30,8 @@ public class Level {
     //Spritebatch
     private final SpriteBatch batchDynamic;
     private final SpriteBatch batchStatic;
+    //Enemy
+    Enemy enemy;
 
 //==============================================================================
 //Methods
@@ -37,7 +40,7 @@ public class Level {
         //Levelsize
         this.levelWidth = levelWidth;
         this.levelHeight = levelHeight;
-        //Textures
+        //Background
         textureLoader = new TextureLoader();
         cloud = textureLoader.getCloud();
         ground = textureLoader.getGround();
@@ -45,6 +48,8 @@ public class Level {
         //Spritebatch
         batchDynamic = new SpriteBatch();
         batchStatic = new SpriteBatch();
+        //Enemy
+        enemy = new Enemy(200, 48);
     }
 
     public void drawLevel() {
@@ -58,18 +63,21 @@ public class Level {
         //Fills the whole visible Window
         drawRegion(true, cloud, 0, -30, Main.WINDOW_WIDTH / 16, Main.WINDOW_HEIGTH / 32, 16, 32);
         batchStatic.end();
-        batchDynamic.begin();
 //------------------------------------------------------------------------------
-//Static Batch. This wont move when the player/cam moves
+//Dynamic Batch. This will move when the player/cam moves
 //Careful, ALL booleans MUST be false
 //------------------------------------------------------------------------------
+        batchDynamic.begin();
         //Background
         drawRegion(false, groundTop, 0, 32, 35, 1, 16, 16);
         drawRegion(false, groundTop, 640, 32, 35, 1, 16, 16);
         drawRegion(false, ground, 0, 0, 35, 2, 16, 16);
         drawRegion(false, ground, 640, 0, 35, 2, 16, 16);
-
+        //Enemy
+        drawRegion(false, enemy.getEnemyTexture(), (int) enemy.getEnemyX(), (int) enemy.getEnemyY(), 1, 1, 16, 16);
         batchDynamic.end();
+        //Update
+        enemy.update();
     }
 
     //Parameter: Texture, StartPositionX, StartPositionY, Repeat X, Repeat Y, Texture width, Texture height

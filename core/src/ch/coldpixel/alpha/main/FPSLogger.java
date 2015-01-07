@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ch.coldpixel.alpha.main;
 
 import com.badlogic.gdx.Gdx;
@@ -14,19 +13,19 @@ import com.badlogic.gdx.utils.TimeUtils;
  * @author Coldpixel
  */
 public class FPSLogger {
-    
+
 //==============================================================================
 //Initialization
 //==============================================================================
     long startTime;
-    long test = System.nanoTime();
-    
+
 //==============================================================================
 //Methods
 //==============================================================================
     public FPSLogger() {
         startTime = TimeUtils.nanoTime();
     }
+
     /**
      * Logs the current frames per second to the console.
      */
