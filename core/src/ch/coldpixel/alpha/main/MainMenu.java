@@ -45,8 +45,8 @@ public class MainMenu extends ApplicationAdapter implements Screen {
 
     private Skin skin;
 
-    private Stage stage = new Stage();
-    private Table table = new Table();
+    private Stage stage;
+    private Table table;
 
 
 //==============================================================================
