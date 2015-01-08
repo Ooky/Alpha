@@ -2,17 +2,22 @@ package ch.coldpixel.alpha.main;
 
 import ch.coldpixel.alpha.level.Level;
 
-import ch.coldpixel.alpha.level.TextureLoader;
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 /**
  *
  * @author Coldpixel
  */
-public class Main extends ApplicationAdapter {
+public class MainMenu extends ApplicationAdapter implements Screen {
 
 //==============================================================================
 //Initialization
@@ -34,42 +39,35 @@ public class Main extends ApplicationAdapter {
     Boolean showFPS;
     //Level
     Level level;
+    private MainMenu menu;
+
+    TextButton buttonPlay;
+
+    private Skin skin;
+
+    private Stage stage = new Stage();
+    private Table table = new Table();
+
 
 //==============================================================================
 //Methods
 //==============================================================================
     @Override
     public void create() {
+        skin = new Skin(Gdx.files.internal("Graphics/MenuSkins/uiskin.json"),
+                new TextureAtlas(Gdx.files.internal("Graphics/MenuSkins/uiskin.atlas")));
 
-        //Player
-        player = new Player(100, 200);
-        //FPS
-        fps = new FPSLogger();
-        showFPS = false;
-        //Spritebatch
-        batch = new SpriteBatch();
-        //Camera
-        cam = new Camera();
-        //Level
-        level = new Level(WINDOW_WIDTH * 3, WINDOW_HEIGTH);
+        TextButton buttonPlay = new TextButton("Hi", skin);
+
     }
 
     @Override
     public void render() {
-        //Update the Camera
-        cam.camUpdate(level.getBatchDynamic());
-        //Clear the Screen
-        Gdx.gl.glClearColor(255, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        level.drawLevel();
-        //Batchdrawing
-        batch.begin();
-        batch.draw(player.texture, player.getPlayerX(), player.getPlayerY());
-        batch.end();
-        //FPS
-        if (showFPS) {
-            fps.log();
-        }
+        stage.act();
+        stage.draw();
+
     }
 
     @Override
@@ -78,5 +76,20 @@ public class Main extends ApplicationAdapter {
         level.getBatchDynamic().dispose();
         player.texture.dispose();
         batch.dispose();
+    }
+
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void render(float f) {
+
+    }
+
+    @Override
+    public void hide() {
+
     }
 }
