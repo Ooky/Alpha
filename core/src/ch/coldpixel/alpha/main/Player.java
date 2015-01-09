@@ -7,6 +7,7 @@ package ch.coldpixel.alpha.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -23,8 +24,14 @@ public class Player {
     final int playerHeight;
     //Texture
     Texture texture;
+    Texture sheet;
     //TextureRegion
     TextureRegion playerTexture;
+    TextureRegion[] animFrames;
+    //Animation
+    Animation animation;
+    TextureRegion currentFrame;
+    float stateTime;
     //Coordinates
     private float playerX;
     private float playerY;
@@ -58,6 +65,18 @@ public class Player {
         //Movement
         this.walkSpeed = 300;
         this.runSpeed = (int) (walkSpeed * 1.5);
+        //Animation
+        sheet = new Texture(Gdx.files.internal("Graphics/Player/playerSprite.png"));
+        TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / 2, sheet.getHeight() / 2);
+        animFrames = new TextureRegion[2 * 2];
+        int index = 0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                animFrames[index++] = tmp[i][j];
+            }
+        }
+        animation = new Animation(1, animFrames);
+        stateTime=0f;
     }
 
     public void update() {
@@ -91,6 +110,18 @@ public class Player {
         return runSpeed;
     }
 
+    public Animation getAnimation() {
+        return animation;
+    }
+
+    public TextureRegion getCurrentFrame() {
+        return currentFrame;
+    }
+    
+    public float getStateTime() {
+        return stateTime;
+    }
+
 //==============================================================================
 //Setter
 //==============================================================================
@@ -101,4 +132,13 @@ public class Player {
     public void setPlayerY(float playerY) {
         this.playerY = playerY;
     }
+
+    public void setCurrentFrame(TextureRegion currentFrame) {
+        this.currentFrame = currentFrame;
+    }
+
+    public void setStateTime(float stateTime) {
+        this.stateTime = stateTime;
+    }
+        
 }

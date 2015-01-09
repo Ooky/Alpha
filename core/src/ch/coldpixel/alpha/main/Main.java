@@ -65,6 +65,9 @@ public class Main extends ApplicationAdapter {
         //Batchdrawing
         batch.begin();
         batch.draw(player.texture, player.getPlayerX(), player.getPlayerY());
+        player.setStateTime(player.getStateTime() + Gdx.graphics.getDeltaTime());
+        player.setCurrentFrame(player.getAnimation().getKeyFrame(player.getStateTime(), true));
+        batch.draw(player.getCurrentFrame(),  player.getPlayerX(), player.getPlayerY());
         batch.end();
         //FPS
         if (showFPS) {
