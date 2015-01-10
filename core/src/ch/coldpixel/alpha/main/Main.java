@@ -67,11 +67,8 @@ public class Main extends ApplicationAdapter {
         //Batchdrawing
         batch.begin();
         
-        
         //Not necessary anymore with playerAnimation below
-        batch.draw(player.texture, player.getPlayerX(), player.getPlayerY());
-        
-        
+//        batch.draw(player.texture, player.getPlayerX(), player.getPlayerY());
         
         batch.draw(player.getCurrentFrame(),  player.getPlayerX(), player.getPlayerY());
         batch.end();

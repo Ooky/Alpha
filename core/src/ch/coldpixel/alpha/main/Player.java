@@ -72,7 +72,7 @@ public class Player {
         this.rows = 4;
         this.columns = 4;
         this.frameDuration =  0.2f;
-        sheet = new Texture(Gdx.files.internal("Graphics/Player/playerSprite - Kopie.png"));
+        sheet = new Texture(Gdx.files.internal("Graphics/Player/playerSprite.png"));
         TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / rows, sheet.getHeight() / columns);
         animFrames = new TextureRegion[rows * columns];
         int index = 0;
