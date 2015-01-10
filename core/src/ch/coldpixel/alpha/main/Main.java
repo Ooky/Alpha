@@ -2,7 +2,6 @@ package ch.coldpixel.alpha.main;
 
 import ch.coldpixel.alpha.level.Level;
 
-import ch.coldpixel.alpha.level.TextureLoader;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -42,7 +41,8 @@ public class Main extends ApplicationAdapter {
     public void create() {
 
         //Player
-        player = new Player(100, 200);
+        player = new Player();//Necessary to calculate the center below
+        player = new Player((WINDOW_WIDTH/2)-(player.getPlayerWidth()/2), (WINDOW_HEIGTH/2)-(player.getPlayerHeight()/2));
         //FPS
         fps = new FPSLogger();
         showFPS = false;

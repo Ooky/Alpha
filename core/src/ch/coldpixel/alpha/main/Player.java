@@ -29,6 +29,9 @@ public class Player {
     TextureRegion playerTexture;
     TextureRegion[] animFrames;
     //Animation
+    int rows;
+    int columns;
+    float frameDuration;//=AnimationSpeed
     Animation animation;
     TextureRegion currentFrame;
     float stateTime;
@@ -44,8 +47,8 @@ public class Player {
 //==============================================================================
     public Player() {
         //PlayerSize
-        this.playerWidth = 32;
-        this.playerHeight = 64;
+        this.playerWidth = 64;
+        this.playerHeight = 32;
         //Movement
         this.walkSpeed = 300;
         this.runSpeed = (int) (walkSpeed * 1.5);
@@ -66,17 +69,21 @@ public class Player {
         this.walkSpeed = 300;
         this.runSpeed = (int) (walkSpeed * 1.5);
         //Animation
-        sheet = new Texture(Gdx.files.internal("Graphics/Player/playerSprite.png"));
-        TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / 2, sheet.getHeight() / 2);
-        animFrames = new TextureRegion[2 * 2];
+        this.rows = 4;
+        this.columns = 4;
+        this.frameDuration =  0.2f;
+        sheet = new Texture(Gdx.files.internal("Graphics/Player/playerSprite - Kopie.png"));
+        TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / rows, sheet.getHeight() / columns);
+        animFrames = new TextureRegion[rows * columns];
         int index = 0;
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
                 animFrames[index++] = tmp[i][j];
             }
         }
-        animation = new Animation(1, animFrames);
-        stateTime=0f;
+        animation = new Animation(frameDuration, animFrames);
+        stateTime = 0f;
+
     }
 
     public void update() {
@@ -119,7 +126,7 @@ public class Player {
     public TextureRegion getCurrentFrame() {
         return currentFrame;
     }
-    
+
     public float getStateTime() {
         return stateTime;
     }
@@ -142,5 +149,5 @@ public class Player {
     public void setStateTime(float stateTime) {
         this.stateTime = stateTime;
     }
-        
+
 }
