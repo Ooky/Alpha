@@ -37,6 +37,7 @@ public class Player {
     float stateTime;
     //PlayerState
     private int playerState;
+    private int playerStateOld;
     //Coordinates
     private float playerX;
     private float playerY;
@@ -58,29 +59,34 @@ public class Player {
         this.columns = 4;
         this.frameDuration = 0.3f;
         stateTime = 0f;
+        this.playerStateOld = 9999999;//Necessary for the first Animation
     }
 
     public void update() {
         //Animation
-        switch (getPlayerState()) {
-            //IdleAnimation after 5 seconds
-            case 1:
+        if (playerState != playerStateOld) {
+            switch (getPlayerState()) {
+                //IdleAnimation after 5 seconds
+                case 1:
 //                changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/playerIdleAnimation.png")), 4, 4);
-                changeAnimation(new Texture(Gdx.files.internal("Graphics_unused/idle_luca.png")), 2, 2);
-                break;
-            //DefaultAnimation = Animation between movement and idle
-            default:
-//                changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/defaultAnimation.png")), 4, 4);
-                changeAnimation(new Texture(Gdx.files.internal("Graphics_unused/idle_luca.png")), 2, 2);
-                break;
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics_unused/luca_concepts1.png")), 2, 1);
+                    playerStateOld = 1;
+                    break;
+                //DefaultAnimation = Animation between movement and idle
+                default:
+                changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/defaultAnimation.png")), 4, 4);
+//                    changeAnimation(new Texture(Gdx.files.internal("Graphics_unused/idle_luca.png")), 2, 2);
+                    playerStateOld = 0;
+                    break;
+            }
         }
-        setStateTime(getStateTime() + Gdx.graphics.getDeltaTime());
-        setCurrentFrame(getAnimation().getKeyFrame(getStateTime(), true));
+            setStateTime(getStateTime() + Gdx.graphics.getDeltaTime());
+            setCurrentFrame(getAnimation().getKeyFrame(getStateTime(), true));
     }
 
-    public void changeAnimation(Texture texture, int rows, int columns) {
+    public void changeAnimation(Texture texture, int columns, int rows) {
         sheet = texture;
-        TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / rows, sheet.getHeight() / columns);
+        TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / columns, sheet.getHeight() / rows);
         animFrames = new TextureRegion[rows * columns];
         int index = 0;
         for (int i = 0; i < rows; i++) {
