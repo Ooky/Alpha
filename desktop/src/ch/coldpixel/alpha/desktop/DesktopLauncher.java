@@ -19,10 +19,10 @@ public class DesktopLauncher {
         mainMenu = new MainMenu();
         main = new Main();
 
-        Boolean chooseMenu = false;
+        
 
         //MainMenu
-        if (chooseMenu) {
+        if (false) {
             config.width = MainMenu.WINDOW_WIDTH;
             config.height = MainMenu.WINDOW_HEIGTH;
             config.title = MainMenu.GAMENAME;
