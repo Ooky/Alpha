@@ -48,7 +48,7 @@ public class Player {
 //Methods
 //==============================================================================
     public Player() {
-         //PlayerSize
+        //PlayerSize
         this.playerWidth = 32;
         this.playerHeight = 64;
         this.walkSpeed = 300;
@@ -56,7 +56,7 @@ public class Player {
         //Animation
         this.rows = 4;
         this.columns = 4;
-        this.frameDuration =  0.2f;
+        this.frameDuration = 0.2f;
         sheet = new Texture(Gdx.files.internal("Graphics/Player/defaultAnimation.png"));
         TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / rows, sheet.getHeight() / columns);
         animFrames = new TextureRegion[rows * columns];
@@ -74,17 +74,19 @@ public class Player {
         //Animation
         setStateTime(getStateTime() + Gdx.graphics.getDeltaTime());
         setCurrentFrame(getAnimation().getKeyFrame(getStateTime(), true));
-        switch(getPlayerState()){
+        switch (getPlayerState()) {
+            //IdleAnimation after 5 seconds
             case 1:
                 changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/playerIdleAnimation.png")), 4, 4);
                 break;
+            //DefaultAnimation = Animation between movement and idle
             default:
                 changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/defaultAnimation.png")), 4, 4);
                 break;
         }
     }
-    
-    public void changeAnimation(Texture texture,int rows, int columns){
+
+    public void changeAnimation(Texture texture, int rows, int columns) {
         sheet = texture;
         TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / rows, sheet.getHeight() / columns);
         animFrames = new TextureRegion[rows * columns];
@@ -100,6 +102,7 @@ public class Player {
 //==============================================================================
 //Getter
 //==============================================================================
+
     public float getPlayerX() {
         return playerX;
     }
@@ -142,6 +145,7 @@ public class Player {
 //==============================================================================
 //Setter
 //==============================================================================
+
     public void setPlayerX(float playerX) {
         this.playerX = playerX;
     }
@@ -164,5 +168,5 @@ public class Player {
 
     public void setPlayerState(int playerState) {
         this.playerState = playerState;
-    }    
+    }
 }

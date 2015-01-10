@@ -24,7 +24,8 @@ public class Camera {
     //Camera
     private final OrthographicCamera camera;
     private final float rotationSpeed;
-    private static final float WAIT_TIME=5f;
+    //Idle-timer
+    private static float WAIT_TIME;
     private float time=0f;
     //Player
     Player player;
@@ -38,6 +39,9 @@ public class Camera {
         camera.setToOrtho(false, WINDOW_WIDTH, WINDOW_HEIGTH);
         camera.update();
         player = new Player();
+        //Idle-timer
+        WAIT_TIME = 5f;
+        time =0f;
     }
 
     public void camUpdate(Batch batch) {
@@ -65,6 +69,7 @@ public class Camera {
         time+=Gdx.graphics.getDeltaTime();
         if(time >= WAIT_TIME){
             player.setPlayerState(1);
+            System.out.println(Gdx.graphics.getDeltaTime());
             time -= WAIT_TIME;
         }
         if (leftOrA()) {
@@ -73,6 +78,7 @@ public class Camera {
             } else {
                 walkLeft();
             }
+            player.setPlayerState(0);
             time=0;
         }
         if (rightOrD()) {
@@ -81,15 +87,18 @@ public class Camera {
             } else {
                 walkRight();
             }
+            player.setPlayerState(0);
             time=0;
         }
 
         if (Gdx.input.isKeyPressed(Keys.S)) {
             camera.translate(0, -3, 0);
+            player.setPlayerState(0);
             time=0;
         }
         if (Gdx.input.isKeyPressed(Keys.W)) {
             camera.translate(0, 3, 0);
+            player.setPlayerState(0);
             time=0;
         }
 
