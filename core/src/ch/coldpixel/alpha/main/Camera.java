@@ -24,6 +24,8 @@ public class Camera {
     //Camera
     private final OrthographicCamera camera;
     private final float rotationSpeed;
+    private static final float WAIT_TIME=5f;
+    private float time=0f;
     //Player
     Player player;
 
@@ -60,12 +62,18 @@ public class Camera {
 //PlayerMovement
 //The Player actually doesnt move, it just moves the cam arround
 //------------------------------------------------------------------------------
+        time+=Gdx.graphics.getDeltaTime();
+        if(time >= WAIT_TIME){
+            player.setPlayerState(1);
+            time -= WAIT_TIME;
+        }
         if (leftOrA()) {
             if (isRunning()) {
                 runLeft();
             } else {
                 walkLeft();
             }
+            time=0;
         }
         if (rightOrD()) {
             if (isRunning()) {
@@ -73,13 +81,16 @@ public class Camera {
             } else {
                 walkRight();
             }
+            time=0;
         }
 
         if (Gdx.input.isKeyPressed(Keys.S)) {
             camera.translate(0, -3, 0);
+            time=0;
         }
         if (Gdx.input.isKeyPressed(Keys.W)) {
             camera.translate(0, 3, 0);
+            time=0;
         }
 
 //------------------------------------------------------------------------------

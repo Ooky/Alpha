@@ -65,6 +65,9 @@ public class Main extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         level.drawLevel();
         //Player
+        //Sets playerState of the player
+        //from the playerState of the cam
+        player.setPlayerState(cam.player.getPlayerState());
         player.update();
         //Batchdrawing
         batch.begin();

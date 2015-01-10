@@ -35,6 +35,8 @@ public class Player {
     Animation animation;
     TextureRegion currentFrame;
     float stateTime;
+    //PlayerState
+    private int playerState;
     //Coordinates
     private float playerX;
     private float playerY;
@@ -46,12 +48,6 @@ public class Player {
 //Methods
 //==============================================================================
     public Player() {
-       /* //PlayerSize
-        this.playerWidth = 64;
-        this.playerHeight = 32;
-        //Movement
-        this.walkSpeed = 300;
-        this.runSpeed = (int) (walkSpeed * 1.5);*/
          //PlayerSize
         this.playerWidth = 32;
         this.playerHeight = 64;
@@ -61,7 +57,7 @@ public class Player {
         this.rows = 4;
         this.columns = 4;
         this.frameDuration =  0.2f;
-        sheet = new Texture(Gdx.files.internal("Graphics/Player/playerSprite.png"));
+        sheet = new Texture(Gdx.files.internal("Graphics/Player/defaultAnimation.png"));
         TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / rows, sheet.getHeight() / columns);
         animFrames = new TextureRegion[rows * columns];
         int index = 0;
@@ -78,8 +74,29 @@ public class Player {
         //Animation
         setStateTime(getStateTime() + Gdx.graphics.getDeltaTime());
         setCurrentFrame(getAnimation().getKeyFrame(getStateTime(), true));
+        switch(getPlayerState()){
+            case 1:
+                changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/playerIdleAnimation.png")), 4, 4);
+                break;
+            default:
+                changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/defaultAnimation.png")), 4, 4);
+                break;
+        }
     }
-
+    
+    public void changeAnimation(Texture texture,int rows, int columns){
+        sheet = texture;
+        TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / rows, sheet.getHeight() / columns);
+        animFrames = new TextureRegion[rows * columns];
+        int index = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                animFrames[index++] = tmp[i][j];
+            }
+        }
+        animation = new Animation(frameDuration, animFrames);
+        setAnimation(animation);
+    }
 //==============================================================================
 //Getter
 //==============================================================================
@@ -119,6 +136,9 @@ public class Player {
         return stateTime;
     }
 
+    public int getPlayerState() {
+        return playerState;
+    }
 //==============================================================================
 //Setter
 //==============================================================================
@@ -138,4 +158,11 @@ public class Player {
         this.stateTime = stateTime;
     }
 
+    public void setAnimation(Animation animation) {
+        this.animation = animation;
+    }
+
+    public void setPlayerState(int playerState) {
+        this.playerState = playerState;
+    }    
 }
