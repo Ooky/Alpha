@@ -39,13 +39,15 @@ public class MainMenu extends ApplicationAdapter implements Screen {
     Boolean showFPS;
     //Level
     Level level;
+    //MainMenu
     private MainMenu menu;
-
+    //TextButton
     TextButton buttonPlay;
-
+    //Skin
     private Skin skin;
-
+    //Stage
     private Stage stage;
+    //Table
     private Table table;
 
 
@@ -57,7 +59,9 @@ public class MainMenu extends ApplicationAdapter implements Screen {
         skin = new Skin(Gdx.files.internal("Graphics/MenuSkins/uiskin.json"),
                 new TextureAtlas(Gdx.files.internal("Graphics/MenuSkins/uiskin.atlas")));
 
-        TextButton buttonPlay = new TextButton("Hi", skin);
+        buttonPlay = new TextButton("Hi", skin);
+        stage = new Stage();
+        table = new Table();
 
     }
 
