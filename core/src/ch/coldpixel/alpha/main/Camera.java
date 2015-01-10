@@ -69,7 +69,6 @@ public class Camera {
         time+=Gdx.graphics.getDeltaTime();
         if(time >= WAIT_TIME){
             player.setPlayerState(1);
-            System.out.println(Gdx.graphics.getDeltaTime());
             time -= WAIT_TIME;
         }
         if (leftOrA()) {

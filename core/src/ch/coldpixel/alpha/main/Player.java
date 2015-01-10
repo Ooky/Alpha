@@ -56,24 +56,12 @@ public class Player {
         //Animation
         this.rows = 4;
         this.columns = 4;
-        this.frameDuration = 0.2f;
-        sheet = new Texture(Gdx.files.internal("Graphics/Player/defaultAnimation.png"));
-        TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / rows, sheet.getHeight() / columns);
-        animFrames = new TextureRegion[rows * columns];
-        int index = 0;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                animFrames[index++] = tmp[i][j];
-            }
-        }
-        animation = new Animation(frameDuration, animFrames);
+        this.frameDuration = 0.3f;
         stateTime = 0f;
     }
 
     public void update() {
         //Animation
-        setStateTime(getStateTime() + Gdx.graphics.getDeltaTime());
-        setCurrentFrame(getAnimation().getKeyFrame(getStateTime(), true));
         switch (getPlayerState()) {
             //IdleAnimation after 5 seconds
             case 1:
@@ -84,6 +72,8 @@ public class Player {
                 changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/defaultAnimation.png")), 4, 4);
                 break;
         }
+        setStateTime(getStateTime() + Gdx.graphics.getDeltaTime());
+        setCurrentFrame(getAnimation().getKeyFrame(getStateTime(), true));
     }
 
     public void changeAnimation(Texture texture, int rows, int columns) {
