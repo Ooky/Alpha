@@ -80,7 +80,9 @@ public class Player {
     }
 
     public void update() {
-        //Todo
+        //Animation
+        setStateTime(getStateTime() + Gdx.graphics.getDeltaTime());
+        setCurrentFrame(getAnimation().getKeyFrame(getStateTime(), true));
     }
 
 //==============================================================================

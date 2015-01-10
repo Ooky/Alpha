@@ -62,11 +62,17 @@ public class Main extends ApplicationAdapter {
         Gdx.gl.glClearColor(255, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         level.drawLevel();
+        //Player
+        player.update();
         //Batchdrawing
         batch.begin();
+        
+        
+        //Not necessary anymore with playerAnimation below
         batch.draw(player.texture, player.getPlayerX(), player.getPlayerY());
-        player.setStateTime(player.getStateTime() + Gdx.graphics.getDeltaTime());
-        player.setCurrentFrame(player.getAnimation().getKeyFrame(player.getStateTime(), true));
+        
+        
+        
         batch.draw(player.getCurrentFrame(),  player.getPlayerX(), player.getPlayerY());
         batch.end();
         //FPS
