@@ -9,7 +9,15 @@ import com.badlogic.gdx.Files;
 public class DesktopLauncher {
 
     public static void main(String[] arg) {
-        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+
+        LwjglApplicationConfiguration config;
+        LwjglApplication application;
+        MainMenu mainMenu;
+        Main main;
+
+        config = new LwjglApplicationConfiguration();
+        mainMenu = new MainMenu();
+        main = new Main();
 
         Boolean chooseMenu = false;
 
@@ -26,9 +34,9 @@ public class DesktopLauncher {
                 config.foregroundFPS = 0;
                 config.backgroundFPS = 0;
             }
-            new LwjglApplication(new MainMenu(), config);
-        
-        //Main
+            application = new LwjglApplication(mainMenu, config);
+
+            //Main
         } else {
             config.width = Main.WINDOW_WIDTH;
             config.height = Main.WINDOW_HEIGTH;
@@ -41,7 +49,7 @@ public class DesktopLauncher {
                 config.foregroundFPS = 0;
                 config.backgroundFPS = 0;
             }
-            new LwjglApplication(new Main(), config);
+            application = new LwjglApplication(main, config);
         }
 
     }

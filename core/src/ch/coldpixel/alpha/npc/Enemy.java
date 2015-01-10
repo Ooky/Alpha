@@ -61,7 +61,7 @@ public class Enemy {
         }
         if (rightOrD()) {
             if (isRunning()) {
-                runLeft();
+                runRight();
             } else {
                 walkRight();
             }
