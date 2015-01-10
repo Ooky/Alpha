@@ -46,26 +46,15 @@ public class Player {
 //Methods
 //==============================================================================
     public Player() {
-        //PlayerSize
+       /* //PlayerSize
         this.playerWidth = 64;
         this.playerHeight = 32;
         //Movement
         this.walkSpeed = 300;
-        this.runSpeed = (int) (walkSpeed * 1.5);
-    }
-
-    public Player(float playerX, float playerY) {
-        //PlayerSize
+        this.runSpeed = (int) (walkSpeed * 1.5);*/
+         //PlayerSize
         this.playerWidth = 32;
         this.playerHeight = 64;
-        //Texture
-        texture = new Texture(Gdx.files.internal("Graphics/Player/player.png"));
-        //TextureRegion
-        this.playerTexture = new TextureRegion(texture, this.playerX, this.playerY, playerWidth, playerHeight);
-        //Position
-        this.playerX = playerX;
-        this.playerY = playerY;
-        //Movement
         this.walkSpeed = 300;
         this.runSpeed = (int) (walkSpeed * 1.5);
         //Animation
@@ -83,7 +72,6 @@ public class Player {
         }
         animation = new Animation(frameDuration, animFrames);
         stateTime = 0f;
-
     }
 
     public void update() {

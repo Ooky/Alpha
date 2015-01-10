@@ -42,7 +42,9 @@ public class Main extends ApplicationAdapter {
 
         //Player
         player = new Player();//Necessary to calculate the center below
-        player = new Player((WINDOW_WIDTH/2)-(player.getPlayerWidth()/2), (WINDOW_HEIGTH/2)-(player.getPlayerHeight()/2));
+        player.setPlayerX((WINDOW_WIDTH/2)-(player.getPlayerWidth()/2));
+        player.setPlayerY((WINDOW_HEIGTH/2)-(player.getPlayerHeight()/2));
+       // player = new Player((WINDOW_WIDTH/2)-(player.getPlayerWidth()/2), (WINDOW_HEIGTH/2)-(player.getPlayerHeight()/2));
         //FPS
         fps = new FPSLogger();
         showFPS = false;
