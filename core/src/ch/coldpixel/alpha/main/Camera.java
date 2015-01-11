@@ -70,24 +70,29 @@ public class Camera {
         if (time >= WAIT_TIME) {
             player.setPlayerState(1);
             time -= WAIT_TIME;
-        }
-        if (leftOrA()) {
+        } else if (leftOrA()) {
             if (isRunning()) {
                 runLeft();
+                player.setPlayerState(3);
             } else {
                 walkLeft();
+                player.setPlayerState(3);
             }
-            player.setPlayerState(0);
+
             time = 0;
-        }
-        if (rightOrD()) {
+        } else if (rightOrD()) {
             if (isRunning()) {
                 runRight();
+                player.setPlayerState(2);
             } else {
                 walkRight();
+                player.setPlayerState(2);
             }
-            player.setPlayerState(0);
+
             time = 0;
+        } else {
+            if (player.getPlayerState() != 1)
+            player.setPlayerState(0);
         }
 
         if (Gdx.input.isKeyPressed(Keys.S)) {
