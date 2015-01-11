@@ -124,6 +124,7 @@ public class Player {
             batch.begin();
             //textureregion, floatx, floaty, rotationpointx, rotationpointy, width, height, scalex, scaley, rotation, clockwise
             if (Gdx.input.getX() >= (Main.WINDOW_WIDTH / 2)) {//Mouse is in the right half
+                swingSpeed = -5;
                 swordSide = playerWidth - 10;
                 batch.draw(textureLoader.getSword(), getPlayerX() + swordSide, getPlayerY() + 15, 0, 0, 16, 16, 3, 3, swordRadiusRight);
                 swordRadiusRight += swingSpeed;
@@ -131,9 +132,10 @@ public class Player {
                     swordRadiusRight = 0;
                 }
             } else {//Mouse is in the left half
+                swingSpeed = 5;
                 swordSide = 10;
                 batch.draw(textureLoader.getSword(), getPlayerX() + swordSide, getPlayerY() + 15, 0, 0, 16, 16, 3, 3, swordRadiusLeft);
-                swordRadiusLeft += 5;
+                swordRadiusLeft += swingSpeed;
                 if (swordRadiusLeft >= 180) {
                     swordRadiusLeft = 90;
                 }
