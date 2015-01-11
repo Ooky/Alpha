@@ -51,15 +51,18 @@ public class Player {
     SpriteBatch batch;
     //SwordSwing
     Boolean isSwinging;
-    int swordRadius;
+    int swordRadiusRight;
+    int swordRadiusLeft;
+    int swingSpeed;
+    int swordSide;
 
 //==============================================================================
 //Methods
 //==============================================================================
     public Player() {
         //PlayerSize
-        this.playerWidth = 32;
-        this.playerHeight = 64;
+        this.playerWidth = 48;
+        this.playerHeight = 16;
         this.walkSpeed = 300;
         this.runSpeed = (int) (walkSpeed * 1.5);
         //Animation
@@ -73,7 +76,10 @@ public class Player {
         batch = new SpriteBatch();
         //SwordSwing
         isSwinging = false;
-        swordRadius = 0;
+        swordRadiusRight = 0;
+        swordRadiusLeft = 90;
+        swingSpeed = -5;
+        swordSide = 40;
     }
 
     public void update() {
@@ -116,12 +122,24 @@ public class Player {
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && !isSwinging) {
 //            isSwinging = true;
             batch.begin();
-//            textureregion, floatx, floaty, rotationpointx, rotationpointy, width, height, scalex, scaley, rotation 
-            batch.draw(textureLoader.getSword(), getPlayerX() + 40, getPlayerY() + 15, 0, 0, 16, 16, 3, 3, swordRadius);
-            swordRadius += -10;
-//            if (swordRadius != -80) {
+            //textureregion, floatx, floaty, rotationpointx, rotationpointy, width, height, scalex, scaley, rotation, clockwise
+            if (Gdx.input.getX() >= (Main.WINDOW_WIDTH / 2)) {//Mouse is in the right half
+                swordSide = playerWidth - 10;
+                batch.draw(textureLoader.getSword(), getPlayerX() + swordSide, getPlayerY() + 15, 0, 0, 16, 16, 3, 3, swordRadiusRight);
+                swordRadiusRight += swingSpeed;
+                if (swordRadiusRight <= -90) {
+                    swordRadiusRight = 0;
+                }
+            } else {//Mouse is in the left half
+                swordSide = 10;
+                batch.draw(textureLoader.getSword(), getPlayerX() + swordSide, getPlayerY() + 15, 0, 0, 16, 16, 3, 3, swordRadiusLeft);
+                swordRadiusLeft += 5;
+                if (swordRadiusLeft >= 180) {
+                    swordRadiusLeft = 90;
+                }
+            }
 //            isSwinging = false;
-//            }
+
             batch.end();
         }
     }

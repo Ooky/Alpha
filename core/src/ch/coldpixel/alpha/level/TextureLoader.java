@@ -59,5 +59,4 @@ public class TextureLoader {
     public TextureRegion getSword() {
         return sword;
     }
-    
 }
