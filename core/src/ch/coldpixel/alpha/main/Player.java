@@ -49,10 +49,9 @@ public class Player {
     private final float runSpeed;
     //SpriteBatch
     SpriteBatch batch;
-    //Timer
-    private static float WAIT_TIME;
-    private float time;
+    //SwordSwing
     Boolean isSwinging;
+    int swordRadius;
 
 //==============================================================================
 //Methods
@@ -72,11 +71,9 @@ public class Player {
         textureLoader = new TextureLoader();
         //SpriteBatch
         batch = new SpriteBatch();
-        //Time
-        WAIT_TIME = 2f;
-        time = 0f;
+        //SwordSwing
         isSwinging = false;
-
+        swordRadius = 0;
     }
 
     public void update() {
@@ -117,17 +114,14 @@ public class Player {
     public void combat() {
         //Mouse Event Handling
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && !isSwinging) {
-            isSwinging = true;
+//            isSwinging = true;
             batch.begin();
-            for (int i = 0; i < 80; i += 10) {
-                time += Gdx.graphics.getDeltaTime();
-                if (time >= WAIT_TIME) {
-                    time -= WAIT_TIME;
-                    //textureregion, floatx, floaty, rotationpointx, rotationpointy, width, height, scalex, scaley, rotation 
-                    batch.draw(textureLoader.getSword(), getPlayerX() + 40, getPlayerY() + 15, 0, 0, 16, 16, 3, 3, i);
-                }
-            }
-            isSwinging = false;
+//            textureregion, floatx, floaty, rotationpointx, rotationpointy, width, height, scalex, scaley, rotation 
+            batch.draw(textureLoader.getSword(), getPlayerX() + 40, getPlayerY() + 15, 0, 0, 16, 16, 3, 3, swordRadius);
+            swordRadius += -10;
+//            if (swordRadius != -80) {
+//            isSwinging = false;
+//            }
             batch.end();
         }
     }
