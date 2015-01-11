@@ -66,7 +66,6 @@ public class Player {
         //Animation
         this.rows = 4;
         this.columns = 4;
-        this.frameDuration = 0.3f;
         stateTime = 0f;
         this.playerStateOld = 9999999;//Necessary for the first Animation
         //TextureLoader
@@ -86,28 +85,27 @@ public class Player {
             switch (getPlayerState()) {
                 //IdleAnimation after 5 seconds
                 case 1:
-                    this.frameDuration = 0.6f;
-                    //changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/playerIdleAnimation.png")), 4, 4);
-                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/idle_long.png")), 2, 2);
+
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/idle_long.png")), 2, 2, 0.8f);
                     playerStateOld = 1;
-                    
+
                     break;
                 //WALK RIGHT
                 case 2:
-                    //changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/playerIdleAnimation.png")), 4, 4);
-                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/luca_walkright.png")), 2, 1);
+
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/luca_walkright.png")), 2, 1, 0.3f);
                     playerStateOld = 1;
                     break;
                 //WALK LEFT
                 case 3:
-                    //changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/playerIdleAnimation.png")), 4, 4);
-                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/luca_walkleft.png")), 2, 1);
+
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/luca_walkleft.png")), 2, 1, 0.3f);
                     playerStateOld = 1;
                     break;
                 //DefaultAnimation = Animation between movement and idle
                 default:
-                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/idle.png")), 2, 1);
-                    //changeAnimation(new Texture(Gdx.files.internal("Graphics_unused/idle_luca.png")), 2, 2);
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/idle.png")), 2, 1, 0.3f);
+
                     playerStateOld = 0;
                     break;
             }
@@ -134,7 +132,7 @@ public class Player {
         }
     }
 
-    public void changeAnimation(Texture texture, int columns, int rows) {
+    public void changeAnimation(Texture texture, int columns, int rows, float frameDuration) {
         sheet = texture;
         TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / columns, sheet.getHeight() / rows);
         animFrames = new TextureRegion[rows * columns];
