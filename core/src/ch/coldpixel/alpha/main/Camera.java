@@ -26,7 +26,7 @@ public class Camera {
     private final float rotationSpeed;
     //Idle-timer
     private static float WAIT_TIME;
-    private float time=0f;
+    private float time;
     //Player
     Player player;
 
@@ -41,7 +41,7 @@ public class Camera {
         player = new Player();
         //Idle-timer
         WAIT_TIME = 5f;
-        time =0f;
+        time = 0f;
     }
 
     public void camUpdate(Batch batch) {
@@ -66,8 +66,8 @@ public class Camera {
 //PlayerMovement
 //The Player actually doesnt move, it just moves the cam arround
 //------------------------------------------------------------------------------
-        time+=Gdx.graphics.getDeltaTime();
-        if(time >= WAIT_TIME){
+        time += Gdx.graphics.getDeltaTime();
+        if (time >= WAIT_TIME) {
             player.setPlayerState(1);
             time -= WAIT_TIME;
         }
@@ -78,7 +78,7 @@ public class Camera {
                 walkLeft();
             }
             player.setPlayerState(0);
-            time=0;
+            time = 0;
         }
         if (rightOrD()) {
             if (isRunning()) {
@@ -87,18 +87,18 @@ public class Camera {
                 walkRight();
             }
             player.setPlayerState(0);
-            time=0;
+            time = 0;
         }
 
         if (Gdx.input.isKeyPressed(Keys.S)) {
             camera.translate(0, -3, 0);
             player.setPlayerState(0);
-            time=0;
+            time = 0;
         }
         if (Gdx.input.isKeyPressed(Keys.W)) {
             camera.translate(0, 3, 0);
             player.setPlayerState(0);
-            time=0;
+            time = 0;
         }
 
 //------------------------------------------------------------------------------

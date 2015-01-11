@@ -71,12 +71,10 @@ public class Main extends ApplicationAdapter {
         player.update();
         //Batchdrawing
         batch.begin();
-        
-        //Not necessary anymore with playerAnimation below
-//        batch.draw(player.texture, player.getPlayerX(), player.getPlayerY());
-        
         batch.draw(player.getCurrentFrame(),  player.getPlayerX(), player.getPlayerY());
         batch.end();
+        //Combat
+        player.combat();
         //FPS
         if (showFPS) {
             fps.log();
@@ -87,7 +85,6 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         level.getBatchStatic().dispose();
         level.getBatchDynamic().dispose();
-        player.texture.dispose();
         batch.dispose();
     }
 }

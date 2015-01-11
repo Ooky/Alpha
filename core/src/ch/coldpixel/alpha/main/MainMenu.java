@@ -78,7 +78,6 @@ public class MainMenu extends ApplicationAdapter implements Screen {
     public void dispose() {
         level.getBatchStatic().dispose();
         level.getBatchDynamic().dispose();
-        player.texture.dispose();
         batch.dispose();
     }
 

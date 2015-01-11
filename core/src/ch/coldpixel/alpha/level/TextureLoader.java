@@ -23,6 +23,9 @@ public class TextureLoader {
     private final TextureRegion cloud;
     private final TextureRegion ground;
     private final TextureRegion groundTop;
+    //Items
+    private final Texture itemList;
+    private final TextureRegion sword;
 
 //==============================================================================
 //Methods
@@ -33,6 +36,9 @@ public class TextureLoader {
         cloud = new TextureRegion(backgroundTexture, 0, 32, 16, 62);
         ground = new TextureRegion(backgroundTexture, 0, 16, 16, 16);
         groundTop = new TextureRegion(backgroundTexture, 0, 0, 16, 16);
+        //Items
+        itemList = new Texture(Gdx.files.internal("Graphics/Items/itemList.png"));
+        sword = new TextureRegion(itemList,0,0,24,24);
     }
 
 //==============================================================================
@@ -50,4 +56,8 @@ public class TextureLoader {
         return groundTop;
     }
 
+    public TextureRegion getSword() {
+        return sword;
+    }
+    
 }

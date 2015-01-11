@@ -5,9 +5,12 @@
  */
 package ch.coldpixel.alpha.main;
 
+import ch.coldpixel.alpha.level.TextureLoader;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -22,11 +25,11 @@ public class Player {
     //PlayerSize
     final int playerWidth;
     final int playerHeight;
+    //TextureLoader
+    TextureLoader textureLoader;
     //Texture
-    Texture texture;
     Texture sheet;
     //TextureRegion
-    TextureRegion playerTexture;
     TextureRegion[] animFrames;
     //Animation
     int rows;
@@ -44,6 +47,12 @@ public class Player {
     //Movement
     private final float walkSpeed;
     private final float runSpeed;
+    //SpriteBatch
+    SpriteBatch batch;
+    //Timer
+    private static float WAIT_TIME;
+    private float time;
+    Boolean isSwinging;
 
 //==============================================================================
 //Methods
@@ -60,6 +69,15 @@ public class Player {
         this.frameDuration = 0.3f;
         stateTime = 0f;
         this.playerStateOld = 9999999;//Necessary for the first Animation
+        //TextureLoader
+        textureLoader = new TextureLoader();
+        //SpriteBatch
+        batch = new SpriteBatch();
+        //Time
+        WAIT_TIME = 2f;
+        time = 0f;
+        isSwinging = false;
+
     }
 
     public void update() {
@@ -68,20 +86,38 @@ public class Player {
             switch (getPlayerState()) {
                 //IdleAnimation after 5 seconds
                 case 1:
-//                changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/playerIdleAnimation.png")), 4, 4);
-                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/idle.png")), 2, 1);
+                    //changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/playerIdleAnimation.png")), 4, 4);
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics_unused/luca_concepts1.png")), 2, 1);
                     playerStateOld = 1;
                     break;
                 //DefaultAnimation = Animation between movement and idle
                 default:
-                changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/defaultAnimation.png")), 4, 4);
-//                    changeAnimation(new Texture(Gdx.files.internal("Graphics_unused/idle_luca.png")), 2, 2);
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/defaultAnimation.png")), 4, 4);
+                    //changeAnimation(new Texture(Gdx.files.internal("Graphics_unused/idle_luca.png")), 2, 2);
                     playerStateOld = 0;
                     break;
             }
         }
-            setStateTime(getStateTime() + Gdx.graphics.getDeltaTime());
-            setCurrentFrame(getAnimation().getKeyFrame(getStateTime(), true));
+        setStateTime(getStateTime() + Gdx.graphics.getDeltaTime());
+        setCurrentFrame(getAnimation().getKeyFrame(getStateTime(), true));
+    }
+
+    public void combat() {
+        //Mouse Event Handling
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && !isSwinging) {
+            isSwinging = true;
+            batch.begin();
+            for (int i = 0; i < 80; i += 10) {
+                time += Gdx.graphics.getDeltaTime();
+                if (time >= WAIT_TIME) {
+                    time -= WAIT_TIME;
+                    //textureregion, floatx, floaty, rotationpointx, rotationpointy, width, height, scalex, scaley, rotation 
+                    batch.draw(textureLoader.getSword(), getPlayerX() + 40, getPlayerY() + 15, 0, 0, 16, 16, 3, 3, i);
+                }
+            }
+            isSwinging = false;
+            batch.end();
+        }
     }
 
     public void changeAnimation(Texture texture, int columns, int rows) {
