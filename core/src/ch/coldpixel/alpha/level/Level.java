@@ -49,7 +49,7 @@ public class Level {
         batchDynamic = new SpriteBatch();
         batchStatic = new SpriteBatch();
         //Enemy
-        enemy = new Enemy(200, 48);
+        enemy = new Enemy(550, 48);
     }
 
     public void drawLevel() {

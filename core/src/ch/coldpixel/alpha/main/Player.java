@@ -69,7 +69,7 @@ public class Player {
                 //IdleAnimation after 5 seconds
                 case 1:
 //                changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/playerIdleAnimation.png")), 4, 4);
-                    changeAnimation(new Texture(Gdx.files.internal("Graphics_unused/luca_concepts1.png")), 2, 1);
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/idle.png")), 2, 1);
                     playerStateOld = 1;
                     break;
                 //DefaultAnimation = Animation between movement and idle

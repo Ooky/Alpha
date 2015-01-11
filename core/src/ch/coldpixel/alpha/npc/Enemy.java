@@ -32,7 +32,10 @@ public class Enemy {
     //Movement
     private final float walkSpeed;
     private final float runSpeed;
-
+    private int direction;
+    //Walk-timer
+    private static float WAIT_TIME;
+    private float time=0f;
 //==============================================================================
 //Methods
 //==============================================================================
@@ -49,10 +52,31 @@ public class Enemy {
         //Movement
         this.walkSpeed = 300;
         this.runSpeed = (int) (walkSpeed * 1.5);
+        this.direction = 1;
+        //Walk-timer
+        WAIT_TIME = 1.8f;
+        time =0f;
     }
 
     public void update() {
-        if (leftOrA()) {
+        time+=Gdx.graphics.getDeltaTime();
+        if(time >= WAIT_TIME){
+            if(direction==1){
+                direction=2;
+            }else{
+                direction=1;
+            }
+            time -= WAIT_TIME;
+        }
+       switch(direction){
+           case 1:
+               walkLeft();
+               break;
+           case 2:
+               walkRight();
+               break;
+       }
+      /*  if (leftOrA()) {
             if (isRunning()) {
                 runLeft();
             } else {
@@ -66,6 +90,7 @@ public class Enemy {
                 walkRight();
             }
         }
+        */
     }
 
 //==============================================================================
