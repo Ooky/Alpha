@@ -22,7 +22,7 @@ public class DesktopLauncher {
         
 
         //MainMenu
-        if (true) {
+        if (false) {
             config.width = MainMenu.WINDOW_WIDTH;
             config.height = MainMenu.WINDOW_HEIGTH;
             config.title = MainMenu.GAMENAME;

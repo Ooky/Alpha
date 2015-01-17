@@ -8,6 +8,7 @@ package ch.coldpixel.alpha.main;
 import static ch.coldpixel.alpha.main.Main.WINDOW_HEIGTH;
 import static ch.coldpixel.alpha.main.Main.WINDOW_WIDTH;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -115,6 +116,19 @@ public class Camera {
         if (Gdx.input.isKeyPressed(Keys.Q)) {
             camera.rotate(rotationSpeed, 0, 0, 1);
         }
+        
+//------------------------------------------------------------------------------
+//Combat Clickfunction
+//------------------------------------------------------------------------------
+        //should check if players combat function is activ and change
+        //the animation to the starndard animation
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            if(player.getPlayerState() == 1){
+                System.out.println("test");
+                player.setPlayerState(0);
+                time = 0;
+            }
+        }        
     }
 
 //==============================================================================

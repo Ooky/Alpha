@@ -49,7 +49,8 @@ public class Player {
     private final float runSpeed;
     //SpriteBatch
     SpriteBatch batch;
-    //SwordSwing
+    //SwordSwing 
+    //could be deleted 17.01.2015 11:11
     Boolean isSwinging;
     int swordRadiusRight;
     int swordRadiusLeft;
