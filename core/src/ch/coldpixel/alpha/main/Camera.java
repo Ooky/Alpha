@@ -28,6 +28,8 @@ public class Camera {
     //Idle-timer
     private static float WAIT_TIME;
     private float time;
+    //Gravitation
+    private float increasingFallSpeed;
     //Player
     Player player;
 
@@ -43,16 +45,19 @@ public class Camera {
         //Idle-timer
         WAIT_TIME = 5f;
         time = 0f;
+        //Gravitation
+        increasingFallSpeed=player.getFallSpeed();
     }
 
     public void camUpdate(Batch batch) {
         handleInput();
+        gravity();
         //Updates our OrthographicCamera after handleInput()!
         camera.update();
         batch.setProjectionMatrix(camera.combined);
     }
 
-    public void handleInput() {
+    private void handleInput() {
 //------------------------------------------------------------------------------
 //Zoom
 //------------------------------------------------------------------------------
@@ -98,11 +103,13 @@ public class Camera {
 
         if (Gdx.input.isKeyPressed(Keys.S)) {
             camera.translate(0, -3, 0);
+            player.setPlayerY(player.getPlayerY()-3);
             player.setPlayerState(0);
             time = 0;
         }
         if (Gdx.input.isKeyPressed(Keys.W)) {
             camera.translate(0, 3, 0);
+            player.setPlayerY(player.getPlayerY()+3);
             player.setPlayerState(0);
             time = 0;
         }
@@ -130,7 +137,28 @@ public class Camera {
             }
         }        
     }
-
+//------------------------------------------------------------------------------
+//Gravity 
+//------------------------------------------------------------------------------
+private void gravity(){
+    //Pseudo collision
+    if(player.getPlayerY()<=-300){
+        player.setIsFalling(false);
+        increasingFallSpeed=player.getFallSpeed();
+    }else{
+        player.setIsFalling(true);
+    }
+    //gravity movment
+    if(player.getIsFalling()){
+        player.setPlayerState(4);
+        camera.translate(0, -increasingFallSpeed * Gdx.graphics.getDeltaTime(), 0);
+        player.setPlayerY(player.getPlayerY()-increasingFallSpeed * Gdx.graphics.getDeltaTime());
+        //Maximum fallspeed
+        if(increasingFallSpeed<=500){
+            increasingFallSpeed=increasingFallSpeed*player.getFallSpeedMultiplier();
+        }
+    }
+}
 //==============================================================================
 //Keycode
 //==============================================================================
@@ -147,18 +175,23 @@ public class Camera {
     }
 
     public void walkLeft() {
-        camera.translate(player.getPlayerX() - player.getWalkSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
+        camera.translate(- player.getWalkSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
+        //if camera moves also change player position to know where the player actually is
+        player.setPlayerX(- player.getWalkSpeed() * Gdx.graphics.getDeltaTime());
     }
 
     public void runLeft() {
-        camera.translate(player.getPlayerX() - player.getRunSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
+        camera.translate(- player.getRunSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
+        player.setPlayerX( - player.getRunSpeed() * Gdx.graphics.getDeltaTime());
     }
 
     public void walkRight() {
-        camera.translate(player.getPlayerX() + player.getWalkSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
+        camera.translate(player.getWalkSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
+        player.setPlayerX(player.getWalkSpeed() * Gdx.graphics.getDeltaTime());
     }
 
     public void runRight() {
-        camera.translate(player.getPlayerX() + player.getRunSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
+        camera.translate(player.getRunSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
+        player.setPlayerX(player.getRunSpeed() * Gdx.graphics.getDeltaTime());
     }
 }

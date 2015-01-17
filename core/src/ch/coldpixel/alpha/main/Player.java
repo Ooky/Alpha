@@ -47,6 +47,10 @@ public class Player {
     //Movement
     private final float walkSpeed;
     private final float runSpeed;
+    //Gravitation
+    private final float fallSpeed;
+    private final float fallSpeedMultiplier;
+    private boolean isFalling;
     //SpriteBatch
     SpriteBatch batch;
     //SwordSwing 
@@ -64,8 +68,13 @@ public class Player {
         //PlayerSize
         this.playerWidth = 48;
         this.playerHeight = 16;
+        //Movement
         this.walkSpeed = 300;
         this.runSpeed = (int) (walkSpeed * 1.5);
+        //Gravitation
+        this.fallSpeed = 1f;
+        this.fallSpeedMultiplier = 1.5f;
+        this.isFalling = true;
         //Animation
         this.rows = 4;
         this.columns = 4;
@@ -104,6 +113,11 @@ public class Player {
                 case 3:
 
                     changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/luca_walkleft.png")), 2, 1, 0.3f);
+                    playerStateOld = 1;
+                    break;
+                case 4:
+                    
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/player_fall.png")), 2, 1, 0.3f);
                     playerStateOld = 1;
                     break;
                 //DefaultAnimation = Animation between movement and idle
@@ -203,6 +217,19 @@ public class Player {
     public int getPlayerState() {
         return playerState;
     }
+
+    public float getFallSpeed() {
+        return fallSpeed;
+    }
+
+    public float getFallSpeedMultiplier() {
+        return fallSpeedMultiplier;
+    }
+
+    public boolean getIsFalling() {
+        return isFalling;
+    }
+    
 //==============================================================================
 //Setter
 //==============================================================================
@@ -230,4 +257,9 @@ public class Player {
     public void setPlayerState(int playerState) {
         this.playerState = playerState;
     }
+
+    public void setIsFalling(boolean isFalling) {
+        this.isFalling = isFalling;
+    }
+    
 }
