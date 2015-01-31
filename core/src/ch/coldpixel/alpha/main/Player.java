@@ -117,7 +117,7 @@ public class Player {
                     break;
                 case 4:
                     
-                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/player_fall.png")), 2, 1, 0.3f);
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/luca_jumpright.png")), 2, 2, 0.2f);
                     playerStateOld = 1;
                     break;
                 //DefaultAnimation = Animation between movement and idle
