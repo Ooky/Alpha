@@ -107,9 +107,9 @@ public class Camera {
             player.setPlayerState(0);
             time = 0;
         }
-        if (Gdx.input.isKeyPressed(Keys.W)) {
-            camera.translate(0, 3, 0);
-            player.setPlayerY(player.getPlayerY()+3);
+        if (Gdx.input.isKeyPressed(Keys.SPACE) && increasingFallSpeed<=500) {
+            camera.translate(0, 10, 0);
+            player.setPlayerY(player.getPlayerY()+10);
             player.setPlayerState(0);
             time = 0;
         }
