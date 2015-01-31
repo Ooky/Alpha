@@ -32,7 +32,9 @@ public class Camera {
     private float increasingFallSpeed;
     //Player
     Player player;
-
+    //Camera Position( collision)
+    private float xPosition;
+    private float yPosition;
 //==============================================================================
 //Methods
 //==============================================================================
@@ -103,13 +105,13 @@ public class Camera {
 
         if (Gdx.input.isKeyPressed(Keys.S)) {
             camera.translate(0, -3, 0);
-            player.setPlayerY(player.getPlayerY()-3);
+            this.setyPosition(this.getyPosition()-3);
             player.setPlayerState(0);
             time = 0;
         }
         if (Gdx.input.isKeyPressed(Keys.SPACE) && increasingFallSpeed<=500) {
             camera.translate(0, 10, 0);
-            player.setPlayerY(player.getPlayerY()+10);
+            this.setyPosition(this.getyPosition()+10);
             player.setPlayerState(0);
             time = 0;
         }
@@ -142,7 +144,7 @@ public class Camera {
 //------------------------------------------------------------------------------
 private void gravity(){
     //Pseudo collision
-    if(player.getPlayerY()<=-300){
+    if(this.getyPosition()<=-300){
         player.setIsFalling(false);
         increasingFallSpeed=player.getFallSpeed();
     }else{
@@ -152,7 +154,7 @@ private void gravity(){
     if(player.getIsFalling()){
         player.setPlayerState(4);
         camera.translate(0, -increasingFallSpeed * Gdx.graphics.getDeltaTime(), 0);
-        player.setPlayerY(player.getPlayerY()-increasingFallSpeed * Gdx.graphics.getDeltaTime());
+        this.setyPosition(this.getyPosition()-increasingFallSpeed * Gdx.graphics.getDeltaTime());
         //Maximum fallspeed
         if(increasingFallSpeed<=500){
             increasingFallSpeed=increasingFallSpeed*player.getFallSpeedMultiplier();
@@ -177,21 +179,46 @@ private void gravity(){
     public void walkLeft() {
         camera.translate(- player.getWalkSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
         //if camera moves also change player position to know where the player actually is
-        player.setPlayerX(- player.getWalkSpeed() * Gdx.graphics.getDeltaTime());
+        this.setxPosition(- player.getWalkSpeed() * Gdx.graphics.getDeltaTime());
     }
 
     public void runLeft() {
         camera.translate(- player.getRunSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
-        player.setPlayerX( - player.getRunSpeed() * Gdx.graphics.getDeltaTime());
+        this.setxPosition( - player.getRunSpeed() * Gdx.graphics.getDeltaTime());
     }
 
     public void walkRight() {
         camera.translate(player.getWalkSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
-        player.setPlayerX(player.getWalkSpeed() * Gdx.graphics.getDeltaTime());
+        this.setxPosition(player.getWalkSpeed() * Gdx.graphics.getDeltaTime());
     }
 
     public void runRight() {
         camera.translate(player.getRunSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
-        player.setPlayerX(player.getRunSpeed() * Gdx.graphics.getDeltaTime());
+        this.setxPosition(player.getRunSpeed() * Gdx.graphics.getDeltaTime());
     }
+    
+    //==============================================================================
+    //Getter
+    //==============================================================================
+
+    public float getxPosition() {
+        return xPosition;
+    }
+
+    public float getyPosition() {
+        return yPosition;
+    }
+    
+    //==============================================================================
+    //Setter
+    //==============================================================================
+
+    public void setyPosition(float yPosition) {
+        this.yPosition = yPosition;
+    }
+    
+    public void setxPosition(float xPosition) {
+        this.xPosition = xPosition;
+    }
+    
 }
