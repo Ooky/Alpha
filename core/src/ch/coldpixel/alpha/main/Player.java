@@ -60,7 +60,7 @@ public class Player {
     int swordRadiusLeft;
     int swingSpeed;
     int swordSide;
-
+    
 //==============================================================================
 //Methods
 //==============================================================================
@@ -113,18 +113,36 @@ public class Player {
                     break;
                 //Jump
                 case 4:
+                    //Resets the Animation to the first frame if Space was just pressed
+                    if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+                        setStateTime(0);
+                    }
                     changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/jump2.png")), 2, 3, 0.15f);
                     playerStateOld = 1;
                     break;
                 //DefaultAnimation = Animation between movement and idle
                 default:
-                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/idle.png")), 2, 1, 0.3f);
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/idle.png")), 2, 1, 0.5f);
                     playerStateOld = 0;
                     break;
             }
         }
         setStateTime(getStateTime() + Gdx.graphics.getDeltaTime());
         setCurrentFrame(getAnimation().getKeyFrame(getStateTime(), true));
+    }
+
+    public void changeAnimation(Texture texture, int columns, int rows, float frameDuration) {
+        sheet = texture;
+        TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / columns, sheet.getHeight() / rows);
+        animFrames = new TextureRegion[rows * columns];
+        int index = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                animFrames[index++] = tmp[i][j];
+            }
+        }
+        animation = new Animation(frameDuration, animFrames);
+        setAnimation(animation);
     }
 
     public void combat() {
@@ -155,23 +173,9 @@ public class Player {
         }
     }
 
-    public void changeAnimation(Texture texture, int columns, int rows, float frameDuration) {
-        sheet = texture;
-        TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / columns, sheet.getHeight() / rows);
-        animFrames = new TextureRegion[rows * columns];
-        int index = 0;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                animFrames[index++] = tmp[i][j];
-            }
-        }
-        animation = new Animation(frameDuration, animFrames);
-        setAnimation(animation);
-    }
 //==============================================================================
 //Getter
 //==============================================================================
-
     public float getPlayerX() {
         return playerX;
     }
