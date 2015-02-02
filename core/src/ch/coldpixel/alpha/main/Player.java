@@ -69,7 +69,7 @@ public class Player {
         this.playerWidth = 48;
         this.playerHeight = 16;
         //Movement
-        this.walkSpeed = 300;
+        this.walkSpeed = 400;
         this.runSpeed = (int) (walkSpeed * 1.5);
         //Gravitation
         this.fallSpeed = 1f;
@@ -98,32 +98,27 @@ public class Player {
             switch (getPlayerState()) {
                 //IdleAnimation after 5 seconds
                 case 1:
-
                     changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/idle_long.png")), 2, 2, 0.8f);
                     playerStateOld = 1;
-
                     break;
-                //WALK RIGHT
+                //Walk right
                 case 2:
-
                     changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/luca_walkright.png")), 2, 1, 0.3f);
                     playerStateOld = 1;
                     break;
-                //WALK LEFT
+                //Walk left
                 case 3:
-
                     changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/luca_walkleft.png")), 2, 1, 0.3f);
                     playerStateOld = 1;
                     break;
+                //Jump
                 case 4:
-                    
-                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/luca_jumpright.png")), 2, 2, 0.2f);
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/jump2.png")), 2, 3, 0.15f);
                     playerStateOld = 1;
                     break;
                 //DefaultAnimation = Animation between movement and idle
                 default:
                     changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/idle.png")), 2, 1, 0.3f);
-
                     playerStateOld = 0;
                     break;
             }
@@ -156,7 +151,6 @@ public class Player {
                 }
             }
 //            isSwinging = false;
-
             batch.end();
         }
     }
@@ -229,11 +223,10 @@ public class Player {
     public boolean getIsFalling() {
         return isFalling;
     }
-    
+
 //==============================================================================
 //Setter
 //==============================================================================
-
     public void setPlayerX(float playerX) {
         this.playerX = playerX;
     }
@@ -261,5 +254,5 @@ public class Player {
     public void setIsFalling(boolean isFalling) {
         this.isFalling = isFalling;
     }
-    
+
 }
