@@ -1,11 +1,12 @@
 package ch.coldpixel.alpha.main;
 
 import ch.coldpixel.alpha.level.Level;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -33,6 +34,8 @@ public class Main extends ApplicationAdapter {
     Boolean showFPS;
     //Level
     Level level;
+    //CollisionList
+    private List collisionArray;
 
 //==============================================================================
 //Methods
@@ -54,6 +57,7 @@ public class Main extends ApplicationAdapter {
         cam = new Camera();
         //Level
         level = new Level(WINDOW_WIDTH * 3, WINDOW_HEIGTH);
+        collisionArray = level.getCollisionArray();
     }
 
     @Override
@@ -75,6 +79,11 @@ public class Main extends ApplicationAdapter {
         batch.end();
         //Combat
         player.combat();
+        for (Iterator<Collision> iter = collisionArray.iterator(); iter.hasNext(); ) {
+            Collision element = iter.next();
+            System.out.println(cam.getxPosition());
+            System.out.println(cam.getyPosition());
+        }
         //FPS
         if (showFPS) {
             fps.log();
