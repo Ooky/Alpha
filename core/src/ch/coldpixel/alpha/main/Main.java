@@ -35,7 +35,7 @@ public class Main extends ApplicationAdapter {
     //Level
     Level level;
     //CollisionList
-    private List collisionArray;
+    private List<Collision> collisionArray;
 
 //==============================================================================
 //Methods
@@ -54,7 +54,7 @@ public class Main extends ApplicationAdapter {
         //Spritebatch
         batch = new SpriteBatch();
         //Camera
-        cam = new Camera();
+        cam = new Camera((player.getPlayerX()+player.getPlayerWidth()/2),(player.getPlayerY()+player.getPlayerHeight()/2));
         //Level
         level = new Level(WINDOW_WIDTH * 3, WINDOW_HEIGTH);
         collisionArray = level.getCollisionArray();
@@ -81,8 +81,14 @@ public class Main extends ApplicationAdapter {
         player.combat();
         for (Iterator<Collision> iter = collisionArray.iterator(); iter.hasNext(); ) {
             Collision element = iter.next();
-            System.out.println(cam.getxPosition());
-            System.out.println(cam.getyPosition());
+            if(element.getStartY()<cam.getyPosition()
+                    && (element.getStartY()+element.getStartHeight())> cam.getyPosition()){
+                System.out.println("ypos:"+cam.getyPosition());
+            }
+            if(element.getStartX() < cam.getxPosition()
+                    && (element.getStartX()+element.getStartWidth()) > cam.getxPosition()){
+                System.out.println("xpos:"+cam.getxPosition());
+            }
         }
         //FPS
         if (showFPS) {

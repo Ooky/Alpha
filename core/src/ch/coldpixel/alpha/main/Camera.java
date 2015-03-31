@@ -38,7 +38,7 @@ public class Camera {
 //==============================================================================
 //Methods
 //==============================================================================
-    public Camera() {
+    public Camera(float xPos, float yPos) {
         rotationSpeed = 0.5f;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WINDOW_WIDTH, WINDOW_HEIGTH);
@@ -49,6 +49,9 @@ public class Camera {
         time = 0f;
         //Gravitation
         increasingFallSpeed=player.getFallSpeed();
+        //Camera Positon
+        xPosition = xPos;
+        yPosition = yPos;
     }
 
     public void camUpdate(Batch batch) {
@@ -144,7 +147,7 @@ public class Camera {
 //------------------------------------------------------------------------------
 private void gravity(){
     //Pseudo collision
-    if(this.getyPosition()<=-300){
+    if(this.getyPosition()<=(WINDOW_HEIGTH/2)-(player.getPlayerHeight()/2)-300){
         player.setIsFalling(false);
         increasingFallSpeed=player.getFallSpeed();
     }else{
@@ -179,22 +182,22 @@ private void gravity(){
     public void walkLeft() {
         camera.translate(- player.getWalkSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
         //if camera moves also change player position to know where the player actually is
-        this.setxPosition(- player.getWalkSpeed() * Gdx.graphics.getDeltaTime());
+        this.setxPosition(this.getxPosition() - player.getWalkSpeed() * Gdx.graphics.getDeltaTime());
     }
 
     public void runLeft() {
         camera.translate(- player.getRunSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
-        this.setxPosition( - player.getRunSpeed() * Gdx.graphics.getDeltaTime());
+        this.setxPosition(this.getxPosition() - player.getRunSpeed() * Gdx.graphics.getDeltaTime());
     }
 
     public void walkRight() {
         camera.translate(player.getWalkSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
-        this.setxPosition(player.getWalkSpeed() * Gdx.graphics.getDeltaTime());
+        this.setxPosition(this.getxPosition()+player.getWalkSpeed() * Gdx.graphics.getDeltaTime());
     }
 
     public void runRight() {
         camera.translate(player.getRunSpeed() * Gdx.graphics.getDeltaTime(), 0, 0);
-        this.setxPosition(player.getRunSpeed() * Gdx.graphics.getDeltaTime());
+        this.setxPosition(this.getxPosition()+player.getRunSpeed() * Gdx.graphics.getDeltaTime());
     }
     
     //==============================================================================
