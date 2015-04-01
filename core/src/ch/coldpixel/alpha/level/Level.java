@@ -37,7 +37,6 @@ public class Level {
     Enemy enemy;
     //Collision
     private List collisionArray;
-    private boolean collide;
 //==============================================================================
 //Methods
 //==============================================================================
@@ -56,9 +55,7 @@ public class Level {
         //Enemy
         enemy = new Enemy(550, 48);
         //Collision
-        collide=true;
         collisionArray = new ArrayList();
-        collisionArray.add(new Collision(0,-30,16*Main.WINDOW_WIDTH / 16,32*Main.WINDOW_HEIGTH / 32));
     }
 
     public void drawLevel() {
@@ -70,7 +67,7 @@ public class Level {
         //Background
         batchStatic.begin();
         //Fills the whole visible Window
-        drawRegion(true, cloud, 0, -30, Main.WINDOW_WIDTH / 16, Main.WINDOW_HEIGTH / 32, 16, 32,collide);
+        drawRegion(true, cloud, 0, -30, Main.WINDOW_WIDTH / 16, Main.WINDOW_HEIGTH / 32, 16, 32,false);
         batchStatic.end();
 //------------------------------------------------------------------------------
 //Dynamic Batch. This will move when the player/cam moves
@@ -78,19 +75,18 @@ public class Level {
 //------------------------------------------------------------------------------
         batchDynamic.begin();
         //Background
-        drawRegion(false, groundTop, 0, 32, 35, 1, 16, 16,collide);
-        drawRegion(false, groundTop, 640, 32, 35, 1, 16, 16,collide);
-        drawRegion(false, ground, 0, 0, 35, 2, 16, 16,collide);
-        drawRegion(false, ground, 640, 0, 35, 2, 16, 16,collide);
+        drawRegion(false, groundTop, 0, 32, 35, 1, 16, 16,true);
+        drawRegion(false, groundTop, 690, 32, 35, 1, 16, 16,true);
+        drawRegion(false, ground, 0, 0, 35, 2, 16, 16,true);
+        drawRegion(false, ground, 690, 0, 35, 2, 16, 16,true);
         //Enemy
-        drawRegion(false, enemy.getEnemyTexture(), (int) enemy.getEnemyX(), (int) enemy.getEnemyY(), 1, 1, 16, 16,collide);
+        drawRegion(false, enemy.getEnemyTexture(), (int) enemy.getEnemyX(), (int) enemy.getEnemyY(), 1, 1, 16, 16,false);
         batchDynamic.end();
         //Update
         enemy.update();
-        collide=false;
     }
     
-    //Parameter: Texture, StartPositionX, StartPositionY, Repeat X, Repeat Y, Texture width, Texture height
+    //Parameter: Texture, StartPositionX, StartPositionY, Repeat X, Repeat Y, Texture width, Texture height, add region to collider
     public void drawRegion(boolean staticCamera, TextureRegion texture, int xStart, int yStart, int xTimes, int yTimes, int textureWidth, int textureHeight, boolean collide) {
         int oldXStart = xStart;
         int oldYStart = yStart;

@@ -79,16 +79,20 @@ public class Main extends ApplicationAdapter {
         batch.end();
         //Combat
         player.combat();
+        boolean collides = false;
         for (Iterator<Collision> iter = collisionArray.iterator(); iter.hasNext(); ) {
-            Collision element = iter.next();
-            if(element.getStartY()<cam.getyPosition()
-                    && (element.getStartY()+element.getStartHeight())> cam.getyPosition()){
-                System.out.println("ypos:"+cam.getyPosition());
+            Collision element = iter.next();  
+            if((cam.getxPosition()-(player.getPlayerWidth()/2)) < (element.getStartX()+element.getStartWidth())  
+                    && (cam.getxPosition()+(player.getPlayerWidth()/2)) > element.getStartX()
+                    /*&& (cam.getyPosition()+(player.getPlayerHeight()/2)) > element.getStartY()
+                    && (cam.getyPosition()-(player.getPlayerHeight()/2) < (element.getStartY()+element.getStartHeight()))*/){
+                collides = true;
             }
-            if(element.getStartX() < cam.getxPosition()
-                    && (element.getStartX()+element.getStartWidth()) > cam.getxPosition()){
-                System.out.println("xpos:"+cam.getxPosition());
-            }
+        }
+        if(collides){
+            System.out.println("collision");
+        }else{
+            System.out.println("no collision");
         }
         //FPS
         if (showFPS) {
