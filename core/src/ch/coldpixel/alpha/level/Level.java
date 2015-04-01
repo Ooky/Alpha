@@ -76,9 +76,9 @@ public class Level {
         batchDynamic.begin();
         //Background
         drawRegion(false, groundTop, 0, 32, 35, 1, 16, 16,true);
-        drawRegion(false, groundTop, 690, 32, 35, 1, 16, 16,true);
+        drawRegion(false, groundTop, 760, 32, 35, 1, 16, 16,true);
         drawRegion(false, ground, 0, 0, 35, 2, 16, 16,true);
-        drawRegion(false, ground, 690, 0, 35, 2, 16, 16,true);
+        drawRegion(false, ground, 760, 0, 35, 2, 16, 16,true);
         //Enemy
         drawRegion(false, enemy.getEnemyTexture(), (int) enemy.getEnemyX(), (int) enemy.getEnemyY(), 1, 1, 16, 16,false);
         batchDynamic.end();

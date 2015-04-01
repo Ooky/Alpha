@@ -36,6 +36,7 @@ public class Main extends ApplicationAdapter {
     Level level;
     //CollisionList
     private List<Collision> collisionArray;
+    boolean collides = false;
 
 //==============================================================================
 //Methods
@@ -79,7 +80,7 @@ public class Main extends ApplicationAdapter {
         batch.end();
         //Combat
         player.combat();
-        boolean collides = false;
+        collides= false;
         for (Iterator<Collision> iter = collisionArray.iterator(); iter.hasNext(); ) {
             Collision element = iter.next();  
             if((cam.getxPosition()-(player.getPlayerWidth()/2)) < (element.getStartX()+element.getStartWidth())  
@@ -90,9 +91,9 @@ public class Main extends ApplicationAdapter {
             }
         }
         if(collides){
-            System.out.println("collision");
+            cam.setCollides(true);
         }else{
-            System.out.println("no collision");
+            cam.setCollides(false);
         }
         //FPS
         if (showFPS) {

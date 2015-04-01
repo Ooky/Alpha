@@ -30,6 +30,7 @@ public class Camera {
     private float time;
     //Gravitation
     private float increasingFallSpeed;
+    private boolean collides;
     //Player
     Player player;
     //Camera Position( collision)
@@ -49,6 +50,7 @@ public class Camera {
         time = 0f;
         //Gravitation
         increasingFallSpeed=player.getFallSpeed();
+        collides = false;
         //Camera Positon
         xPosition = xPos;
         yPosition = yPos;
@@ -112,7 +114,7 @@ public class Camera {
             player.setPlayerState(0);
             time = 0;
         }
-        if (Gdx.input.isKeyPressed(Keys.SPACE) && increasingFallSpeed<=500) {
+        if(Gdx.input.isKeyPressed(Keys.SPACE) && increasingFallSpeed<=500) {
             camera.translate(0, 10, 0);
             this.setyPosition(this.getyPosition()+10);
             player.setPlayerState(0);
@@ -136,7 +138,6 @@ public class Camera {
         //the animation to the starndard animation
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             if(player.getPlayerState() == 1){
-                System.out.println("test");
                 player.setPlayerState(0);
                 time = 0;
             }
@@ -145,7 +146,7 @@ public class Camera {
 //------------------------------------------------------------------------------
 //Gravity 
 //------------------------------------------------------------------------------
-private void gravity(){
+private void gravity(){    
     //Pseudo collision
     if(this.getyPosition()<=(WINDOW_HEIGTH/2)-(player.getPlayerHeight()/2)-300){
         player.setIsFalling(false);
@@ -153,15 +154,19 @@ private void gravity(){
     }else{
         player.setIsFalling(true);
     }
-    //gravity movment
-    if(player.getIsFalling()){
-        player.setPlayerState(4);
-        camera.translate(0, -increasingFallSpeed * Gdx.graphics.getDeltaTime(), 0);
-        this.setyPosition(this.getyPosition()-increasingFallSpeed * Gdx.graphics.getDeltaTime());
-        //Maximum fallspeed
-        if(increasingFallSpeed<=500){
-            increasingFallSpeed=increasingFallSpeed*player.getFallSpeedMultiplier();
+    if(!collides){
+        //gravity movment
+        if(player.getIsFalling()){
+            player.setPlayerState(4);
+            camera.translate(0, -increasingFallSpeed * Gdx.graphics.getDeltaTime(), 0);
+            this.setyPosition(this.getyPosition()-increasingFallSpeed * Gdx.graphics.getDeltaTime());
+            //Maximum fallspeed
+            if(increasingFallSpeed<=500){
+                increasingFallSpeed=increasingFallSpeed*player.getFallSpeedMultiplier();
+            }
         }
+    }else{
+        increasingFallSpeed = player.getFallSpeed();
     }
 }
 //==============================================================================
@@ -211,6 +216,11 @@ private void gravity(){
     public float getyPosition() {
         return yPosition;
     }
+
+    public boolean getCollides() {
+        return collides;
+    }    
+    
     
     //==============================================================================
     //Setter
@@ -223,5 +233,9 @@ private void gravity(){
     public void setxPosition(float xPosition) {
         this.xPosition = xPosition;
     }
+
+    public void setCollides(boolean collides) {
+        this.collides = collides;
+    }    
     
 }
