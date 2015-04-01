@@ -84,8 +84,8 @@ public class Main extends ApplicationAdapter {
             Collision element = iter.next();  
             if((cam.getxPosition()-(player.getPlayerWidth()/2)) < (element.getStartX()+element.getStartWidth())  
                     && (cam.getxPosition()+(player.getPlayerWidth()/2)) > element.getStartX()
-                    /*&& (cam.getyPosition()+(player.getPlayerHeight()/2)) > element.getStartY()
-                    && (cam.getyPosition()-(player.getPlayerHeight()/2) < (element.getStartY()+element.getStartHeight()))*/){
+                    && (cam.getyPosition()+(player.getPlayerHeight()/2)) > element.getStartY()
+                    && (cam.getyPosition()-(player.getPlayerHeight()/2) < (element.getStartY()+element.getStartHeight()))){
                 collides = true;
             }
         }

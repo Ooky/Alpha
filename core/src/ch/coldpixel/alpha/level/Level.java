@@ -88,6 +88,9 @@ public class Level {
     
     //Parameter: Texture, StartPositionX, StartPositionY, Repeat X, Repeat Y, Texture width, Texture height, add region to collider
     public void drawRegion(boolean staticCamera, TextureRegion texture, int xStart, int yStart, int xTimes, int yTimes, int textureWidth, int textureHeight, boolean collide) {
+        if(collide){
+            collisionArray.add(new Collision(xStart,yStart,textureWidth*xTimes,textureHeight*yTimes));  
+        }
         int oldXStart = xStart;
         int oldYStart = yStart;
         //The Amount of Times a Texture is drawn.
@@ -103,10 +106,7 @@ public class Level {
             }
             xStart = oldXStart;
             yStart = yStart + textureHeight;
-        }
-        if(collide){
-            collisionArray.add(new Collision(xStart,yStart,textureWidth*xTimes,textureHeight*yTimes));  
-        }
+        }        
     }
 //==============================================================================
 //Getter
