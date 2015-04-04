@@ -30,6 +30,9 @@ public class Level {
     private final TextureRegion cloud;
     private final TextureRegion ground;
     private final TextureRegion groundTop;
+    //Environment
+    private final TextureRegion stairs;
+    private final TextureRegion spikeTrap;
     //Spritebatch
     private final SpriteBatch batchDynamic;
     private final SpriteBatch batchStatic;
@@ -49,6 +52,8 @@ public class Level {
         cloud = textureLoader.getCloud();
         ground = textureLoader.getGround();
         groundTop = textureLoader.getGroundTop();
+        stairs = textureLoader.getStairs();
+        spikeTrap = textureLoader.getSpikeTrap();
         //Spritebatch
         batchDynamic = new SpriteBatch();
         batchStatic = new SpriteBatch();
@@ -76,9 +81,23 @@ public class Level {
         batchDynamic.begin();
         //Background
         drawRegion(false, groundTop, 0, 32, 35, 1, 16, 16,true);
-        drawRegion(false, groundTop, 760, 32, 35, 1, 16, 16,true);
+        drawRegion(false, groundTop, 760, 32, 100, 1, 16, 16,true);
         drawRegion(false, ground, 0, 0, 35, 2, 16, 16,true);
-        drawRegion(false, ground, 760, 0, 35, 2, 16, 16,true);
+        drawRegion(false, ground, 760, 0, 100, 2, 16, 16,true);
+        //Drawing Stairs
+        drawRegion(false, stairs, 888, 48, 20, 2, 16, 16,true);
+        drawRegion(false, stairs, 952, 80, 16, 2, 16, 16,true);
+        drawRegion(false, stairs, 1016, 112, 12, 2, 16, 16,true);
+        drawRegion(false, stairs, 1080, 144, 8, 2, 16, 16,true);
+        drawRegion(false, stairs, 1144, 176, 4, 2, 16, 16,true);
+        //Drawing Spike Trap
+        drawRegion(false, spikeTrap, 1208, 48, 12, 1, 16, 16,true);
+        //Drawing Stairs
+        drawRegion(false, stairs, 1388, 48, 20, 2, 16, 16,true);
+        drawRegion(false, stairs, 1388, 80, 16, 2, 16, 16,true);
+        drawRegion(false, stairs, 1388, 112, 12, 2, 16, 16,true);
+        drawRegion(false, stairs, 1388, 144, 8, 2, 16, 16,true);
+        drawRegion(false, stairs, 1388, 176, 4, 2, 16, 16,true);
         //Enemy
         drawRegion(false, enemy.getEnemyTexture(), (int) enemy.getEnemyX(), (int) enemy.getEnemyY(), 1, 1, 16, 16,false);
         batchDynamic.end();
