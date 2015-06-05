@@ -120,6 +120,10 @@ public class Player {
                     changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/jump2.png")), 2, 3, 0.15f);
                     playerStateOld = 1;
                     break;
+                //death
+                case 20:
+                    changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/death.png")),2,2,0.15f);
+                    break;
                 //DefaultAnimation = Animation between movement and idle
                 default:
                     changeAnimation(new Texture(Gdx.files.internal("Graphics/Player/idle.png")), 2, 1, 0.5f);
@@ -173,6 +177,10 @@ public class Player {
         }
     }
 
+    //Death
+    public void death(){
+        playerState = 20;
+    };
 //==============================================================================
 //Getter
 //==============================================================================

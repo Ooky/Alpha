@@ -68,6 +68,10 @@ public class Main extends ApplicationAdapter {
         //Clear the Screen
         Gdx.gl.glClearColor(255, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //player is dead
+        if(player.getPlayerState()==20){
+            this.create();
+        }
         level.drawLevel();
         //Player
         //Sets playerState of the player
@@ -88,6 +92,9 @@ public class Main extends ApplicationAdapter {
                     && (cam.getyPosition()+(player.getPlayerHeight()/2)) > element.getStartY()
                     && (cam.getyPosition()-(player.getPlayerHeight()/2) < (element.getStartY()+element.getStartHeight()))){
                 collides = true;
+                if(element.getDeadly()){
+                    player.death();
+                }
             }
         }
         if(collides){

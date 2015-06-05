@@ -146,11 +146,12 @@ public class Camera {
 //------------------------------------------------------------------------------
 //Gravity 
 //------------------------------------------------------------------------------
-private void gravity(){    
+private void gravity(){
     //Pseudo collision
-    if(this.getyPosition()<=(WINDOW_HEIGTH/2)-(player.getPlayerHeight()/2)-300){
+    if(this.getyPosition()<=(WINDOW_HEIGTH/2)-(player.getPlayerHeight()/2)-400){
         player.setIsFalling(false);
         increasingFallSpeed=player.getFallSpeed();
+        player.death();
     }else{
         player.setIsFalling(true);
     }
