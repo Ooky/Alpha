@@ -97,6 +97,10 @@ public class Main extends ApplicationAdapter {
                     && (cam.getyPosition()+(player.getPlayerHeight()/2)) > element.getStartY()
                     && (cam.getyPosition()-(player.getPlayerHeight()/2) < (element.getStartY()+element.getStartHeight()))){
                 collides = true;
+                if(cam.getyPosition() < (element.getStartY()+element.getStartHeight())){
+                   cam.translate(0,(element.getStartY()+element.getStartHeight())-cam.getyPosition());
+                   cam.setyPosition((element.getStartY()+element.getStartHeight()));                    
+                }
                 if(element.getDeadly()){
                     player.death();
                 }
