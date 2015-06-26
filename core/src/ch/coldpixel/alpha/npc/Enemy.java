@@ -5,6 +5,7 @@
  */
 package ch.coldpixel.alpha.npc;
 
+import ch.coldpixel.alpha.main.Collision;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -36,16 +37,18 @@ public class Enemy {
     //Walk-timer
     private static float WAIT_TIME;
     private float time=0f;
+    //Collision
+    private Collision collision;
 //==============================================================================
 //Methods
 //==============================================================================
     public Enemy(float enemyX, float enemyY) {
         //PlayerSize
-        this.enemyWidth = 32;
-        this.enemyHeight = 64;
+        this.enemyWidth = 16;
+        this.enemyHeight = 16;
         //Texture
         texture = new Texture("Graphics/NPC/Enemy.png");
-        enemyTexture = new TextureRegion(texture, 16, 16);
+        enemyTexture = new TextureRegion(texture, enemyWidth, enemyHeight);
         //Position
         this.enemyX = enemyX;
         this.enemyY = enemyY;
@@ -56,6 +59,8 @@ public class Enemy {
         //Walk-timer
         WAIT_TIME = 1.8f;
         time =0f;
+        //Collision
+        collision = new Collision(enemyX,enemyY,enemyWidth,enemyHeight, true);
     }
 
     public void update() {
@@ -139,15 +144,20 @@ public class Enemy {
         return enemyTexture;
     }
 
+    public Collision getCollision(){
+        return collision;
+    }
 //==============================================================================
 //Setter
 //==============================================================================
     public void setEnemyX(float enemyX) {
         this.enemyX = enemyX;
+        this.collision.setStartX(enemyX);
     }
 
     public void setEnemyY(float enemyY) {
         this.enemyY = enemyY;
+        this.collision.setStartY(enemyY);
     }
 
 }

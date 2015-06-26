@@ -14,8 +14,8 @@ public class Collision {
 //Initialization
 //==============================================================================
     //Start Coordinates
-    private final float startX;
-    private final float startY;
+    private  float startX;
+    private  float startY;
     private final float startWidth;
     private final float startHeight;
     private final boolean deadly;
@@ -53,4 +53,15 @@ public class Collision {
         return deadly;
     }    
     
+//==============================================================================
+//Setter
+//==============================================================================
+    
+     public void setStartX(float startX) {
+        this.startX = startX;
+    }
+     
+     public void setStartY(float startY) {
+        this.startY = startY;
+    }
 }

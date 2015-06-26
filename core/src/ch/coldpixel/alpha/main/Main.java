@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.Iterator;
 import java.util.List;
+import ch.coldpixel.alpha.npc.Enemy;
 
 /**
  *
@@ -36,6 +37,8 @@ public class Main extends ApplicationAdapter {
     Level level;
     //CollisionList
     private List<Collision> collisionArray;
+    //EnemyList
+    private List<Enemy> EnemyList;
     boolean collides = false;
 
 //==============================================================================
@@ -59,6 +62,7 @@ public class Main extends ApplicationAdapter {
         //Level
         level = new Level(WINDOW_WIDTH * 3, WINDOW_HEIGTH);
         collisionArray = level.getCollisionArray();
+        EnemyList = level.getEnemyArray();
     }
 
     @Override
@@ -85,8 +89,22 @@ public class Main extends ApplicationAdapter {
         //Combat
         player.combat();
         collides= false;
+        //Standard and trap collision
         for (Iterator<Collision> iter = collisionArray.iterator(); iter.hasNext(); ) {
             Collision element = iter.next();  
+            if((cam.getxPosition()-(player.getPlayerWidth()/2)) < (element.getStartX()+element.getStartWidth())  
+                    && (cam.getxPosition()+(player.getPlayerWidth()/2)) > element.getStartX()
+                    && (cam.getyPosition()+(player.getPlayerHeight()/2)) > element.getStartY()
+                    && (cam.getyPosition()-(player.getPlayerHeight()/2) < (element.getStartY()+element.getStartHeight()))){
+                collides = true;
+                if(element.getDeadly()){
+                    player.death();
+                }
+            }
+        }
+        //Enemy collision
+        for (Iterator<Enemy> iter = EnemyList.iterator(); iter.hasNext(); ) {
+            Collision element = iter.next().getCollision();  
             if((cam.getxPosition()-(player.getPlayerWidth()/2)) < (element.getStartX()+element.getStartWidth())  
                     && (cam.getxPosition()+(player.getPlayerWidth()/2)) > element.getStartX()
                     && (cam.getyPosition()+(player.getPlayerHeight()/2)) > element.getStartY()
@@ -113,5 +131,9 @@ public class Main extends ApplicationAdapter {
         level.getBatchStatic().dispose();
         level.getBatchDynamic().dispose();
         batch.dispose();
+    }
+    
+    public void collision(){
+    
     }
 }

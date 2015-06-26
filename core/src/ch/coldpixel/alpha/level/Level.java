@@ -41,6 +41,7 @@ public class Level {
     //Collision
     private List collisionArray;
     private Boolean levelIsDrawen=false;
+    private List EnemyArray;
 //==============================================================================
 //Methods
 //==============================================================================
@@ -62,6 +63,8 @@ public class Level {
         enemy = new Enemy(550, 48);
         //Collision
         collisionArray = new ArrayList();
+        EnemyArray = new ArrayList();
+        EnemyArray.add(enemy);
     }
 
     public void drawLevel() {
@@ -151,5 +154,9 @@ public class Level {
 
     public List getCollisionArray() {
         return collisionArray;
+    }
+    
+    public List getEnemyArray(){
+        return EnemyArray;
     }
 }
