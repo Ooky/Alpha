@@ -40,6 +40,7 @@ public class Level {
     Enemy enemy;
     //Collision
     private List collisionArray;
+    private Boolean levelIsDrawen=false;
 //==============================================================================
 //Methods
 //==============================================================================
@@ -100,6 +101,7 @@ public class Level {
         drawRegion(false, stairs, 1388, 176, 4, 2, 16, 16,true, false);
         //Enemy
         drawRegion(false, enemy.getEnemyTexture(), (int) enemy.getEnemyX(), (int) enemy.getEnemyY(), 1, 1, 16, 16,false, false);
+        levelIsDrawen = true;
         batchDynamic.end();
         //Update
         enemy.update();
@@ -107,7 +109,7 @@ public class Level {
     
     //Parameter: Texture, StartPositionX, StartPositionY, Repeat X, Repeat Y, Texture width, Texture height, add region to collider
     public void drawRegion(boolean staticCamera, TextureRegion texture, int xStart, int yStart, int xTimes, int yTimes, int textureWidth, int textureHeight, boolean collide, boolean deadly) {
-        if(collide){
+        if(collide && !levelIsDrawen){
             collisionArray.add(new Collision(xStart,yStart,textureWidth*xTimes,textureHeight*yTimes, deadly));  
         }
         int oldXStart = xStart;
