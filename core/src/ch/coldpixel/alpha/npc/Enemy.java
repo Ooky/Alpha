@@ -35,7 +35,7 @@ public class Enemy {
     private final float runSpeed;
     private int direction;
     //Walk-timer
-    private static float WAIT_TIME;
+    private float WAIT_TIME;
     private float time=0f;
     //Collision
     private Collision collision;
@@ -160,4 +160,7 @@ public class Enemy {
         this.collision.setStartY(enemyY);
     }
 
+    public void setWaitTimer(float waitTimer){
+        this.WAIT_TIME = waitTimer;
+    }
 }

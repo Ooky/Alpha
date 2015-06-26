@@ -38,6 +38,7 @@ public class Level {
     private final SpriteBatch batchStatic;
     //Enemy
     Enemy enemy;
+    Enemy enemy2;
     //Collision
     private List collisionArray;
     private Boolean levelIsDrawen=false;
@@ -60,11 +61,15 @@ public class Level {
         batchDynamic = new SpriteBatch();
         batchStatic = new SpriteBatch();
         //Enemy
-        enemy = new Enemy(550, 48);
+        enemy = new Enemy(250, 48);
+        enemy.setWaitTimer(0.8f);
+        enemy2 = new Enemy(2320, 48);
+        enemy2.setWaitTimer(2f);
         //Collision
         collisionArray = new ArrayList();
         EnemyArray = new ArrayList();
         EnemyArray.add(enemy);
+        EnemyArray.add(enemy2);
     }
 
     public void drawLevel() {
@@ -80,7 +85,7 @@ public class Level {
         batchStatic.end();
 //------------------------------------------------------------------------------
 //Dynamic Batch. This will move when the player/cam moves
-//Careful, ALL booleans MUST be false
+//Careful, ALL booleans MUST be false(only first)
 //------------------------------------------------------------------------------
         batchDynamic.begin();
         //Background
@@ -104,10 +109,12 @@ public class Level {
         drawRegion(false, stairs, 1388, 176, 4, 2, 16, 16,true, false);
         //Enemy
         drawRegion(false, enemy.getEnemyTexture(), (int) enemy.getEnemyX(), (int) enemy.getEnemyY(), 1, 1, 16, 16,false, false);
+        drawRegion(false, enemy2.getEnemyTexture(), (int) enemy2.getEnemyX(), (int) enemy2.getEnemyY(), 1, 1, 16, 16,false, false);
         levelIsDrawen = true;
         batchDynamic.end();
         //Update
         enemy.update();
+        enemy2.update();
     }
     
     //Parameter: Texture, StartPositionX, StartPositionY, Repeat X, Repeat Y, Texture width, Texture height, add region to collider
