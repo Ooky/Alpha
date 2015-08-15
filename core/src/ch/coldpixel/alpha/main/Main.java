@@ -34,7 +34,9 @@ public class Main implements Screen {
     private List<Collision> collisionArray;
     //EnemyList
     private List<Enemy> EnemyList;
+    //collision
     boolean collides = false;
+    boolean sideCollides=false;
     final GameStart game;
 
     public Main(final GameStart passed_game) {
@@ -86,6 +88,17 @@ public class Main implements Screen {
         batch.end();
         //Combat
         player.combat();
+       collision();
+    }
+
+    @Override
+    public void dispose() {
+        level.getBatchStatic().dispose();
+        level.getBatchDynamic().dispose();
+        batch.dispose();
+    }
+
+    public void collision() {
         collides = false;
         //Standard and trap collision
         for (Iterator<Collision> iter = collisionArray.iterator(); iter.hasNext();) {
@@ -93,11 +106,25 @@ public class Main implements Screen {
             if ((cam.getxPosition() - (player.getPlayerWidth() / 2)) < (element.getStartX() + element.getStartWidth())
                     && (cam.getxPosition() + (player.getPlayerWidth() / 2)) > element.getStartX()
                     && (cam.getyPosition() + (player.getPlayerHeight() / 2)) > element.getStartY()
-                    && (cam.getyPosition() - (player.getPlayerHeight() / 2) < (element.getStartY() + element.getStartHeight()))) {
-                collides = true;
-                if (cam.getyPosition() < (element.getStartY() + element.getStartHeight())) {
-                    cam.translate(0, (element.getStartY() + element.getStartHeight()) - cam.getyPosition());
-                    cam.setyPosition((element.getStartY() + element.getStartHeight()));
+                    && (cam.getyPosition() - (player.getPlayerHeight() / 2) < (element.getStartY() + element.getStartHeight()))) {                
+                sideCollides=false;
+                //Collision right of the Player
+                if (cam.getxPosition()+player.getPlayerWidth()/2 <= 20+(element.getStartX())) {
+                    cam.translate(element.getStartX()-player.getPlayerWidth()/2-5 - cam.getxPosition(),0 );
+                    cam.setxPosition(element.getStartX()-player.getPlayerWidth()/2-5);
+                    sideCollides=true;
+                }
+                //Collision left of the Player
+                else if (cam.getxPosition()-player.getPlayerWidth()/2-1 >= (element.getStartX()+element.getStartWidth())-20) {
+                    cam.translate(element.getStartX()+element.getStartWidth()+player.getPlayerWidth()/2+5 - cam.getxPosition(),0 );
+                    cam.setxPosition(element.getStartX()+element.getStartWidth()+player.getPlayerWidth()/2+5);
+                    sideCollides=true;
+                }
+                //Collision under the Player
+                else if (cam.getyPosition()-player.getPlayerHeight()/2 <= (element.getStartY() + element.getStartHeight())) {
+                    cam.translate(0, (player.getPlayerHeight()/2)+(element.getStartY() + element.getStartHeight())-1 - cam.getyPosition());
+                    cam.setyPosition((player.getPlayerHeight()/2)+(element.getStartY() + element.getStartHeight())-1);
+                    collides = true;
                 }
                 if (element.getDeadly()) {
                     player.death();
@@ -122,21 +149,15 @@ public class Main implements Screen {
         } else {
             cam.setCollides(false);
         }
+        if (sideCollides) {
+            cam.setSideCollides(true);
+        } else {
+            cam.setSideCollides(false);
+        }
         //FPS
         if (showFPS) {
             fps.log();
         }
-    }
-
-    @Override
-    public void dispose() {
-        level.getBatchStatic().dispose();
-        level.getBatchDynamic().dispose();
-        batch.dispose();
-    }
-
-    public void collision() {
-
     }
 
     @Override

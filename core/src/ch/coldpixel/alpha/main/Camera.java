@@ -31,6 +31,7 @@ public class Camera {
     //Gravitation
     private float increasingFallSpeed;
     private boolean collides;
+    private boolean sideCollides;
     //Player
     Player player;
     //Camera Position( collision)
@@ -51,6 +52,7 @@ public class Camera {
         //Gravitation
         increasingFallSpeed=player.getFallSpeed();
         collides = false;
+        sideCollides=false;
         //Camera Positon
         xPosition = xPos;
         yPosition = yPos;
@@ -155,7 +157,7 @@ private void gravity(){
     }else{
         player.setIsFalling(true);
     }
-    if(!collides){
+    if(!collides || (sideCollides && !collides)){
         //gravity movment
         if(player.getIsFalling()){
             player.setPlayerState(4);
@@ -222,6 +224,9 @@ private void gravity(){
         return collides;
     }    
     
+    public boolean getSideCollides() {
+        return collides;
+    }    
     
     //==============================================================================
     //Setter
@@ -237,6 +242,10 @@ private void gravity(){
 
     public void setCollides(boolean collides) {
         this.collides = collides;
+    }    
+    
+    public void setSideCollides(boolean sideCollides) {
+        this.sideCollides = sideCollides;
     }    
     
     public void translate(float x, float y){
