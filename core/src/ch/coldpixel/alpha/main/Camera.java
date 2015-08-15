@@ -5,8 +5,8 @@
  */
 package ch.coldpixel.alpha.main;
 
-import static ch.coldpixel.alpha.main.Main.WINDOW_HEIGTH;
-import static ch.coldpixel.alpha.main.Main.WINDOW_WIDTH;
+import static ch.coldpixel.alpha.main.Constants.WINDOW_HEIGTH;
+import static ch.coldpixel.alpha.main.Constants.WINDOW_WIDTH;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;

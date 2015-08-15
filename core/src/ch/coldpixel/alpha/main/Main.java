@@ -1,30 +1,25 @@
 package ch.coldpixel.alpha.main;
 
 import ch.coldpixel.alpha.level.Level;
-import com.badlogic.gdx.ApplicationAdapter;
+import static ch.coldpixel.alpha.main.Constants.WINDOW_HEIGTH;
+import static ch.coldpixel.alpha.main.Constants.WINDOW_WIDTH;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.Iterator;
 import java.util.List;
 import ch.coldpixel.alpha.npc.Enemy;
+import com.badlogic.gdx.Screen;
 
 /**
  *
  * @author Coldpixel
  */
-public class Main extends ApplicationAdapter {
+public class Main implements Screen {
 
 //==============================================================================
 //Initialization
-//==============================================================================
-    //DesktopLauncher
-    public static final boolean RESZIABLE = false;
-    public static final boolean MAX_FPS = false;
-    public static final int WINDOW_WIDTH = 1024;
-    public static final int WINDOW_HEIGTH = 512 + 128;
-    public static final String GAMENAME = "Coldpixel - Alpha";
-    public static final String FAVICON = Icon.getFAVICON();
+//==============================================================================   
     private Player player;
     //Camera
     private Camera cam;
@@ -40,25 +35,28 @@ public class Main extends ApplicationAdapter {
     //EnemyList
     private List<Enemy> EnemyList;
     boolean collides = false;
+    final GameStart game;
+
+    public Main(final GameStart passed_game) {
+        game = passed_game;
+    }
 
 //==============================================================================
 //Methods
 //==============================================================================
-    @Override
     public void create() {
-
         //Player
         player = new Player();//Necessary to calculate the center below
-        player.setPlayerX((WINDOW_WIDTH/2)-(player.getPlayerWidth()/2));
-        player.setPlayerY((WINDOW_HEIGTH/2)-(player.getPlayerHeight()/2));
-       // player = new Player((WINDOW_WIDTH/2)-(player.getPlayerWidth()/2), (WINDOW_HEIGTH/2)-(player.getPlayerHeight()/2));
+        player.setPlayerX((WINDOW_WIDTH / 2) - (player.getPlayerWidth() / 2));
+        player.setPlayerY((WINDOW_HEIGTH / 2) - (player.getPlayerHeight() / 2));
+        // player = new Player((WINDOW_WIDTH/2)-(player.getPlayerWidth()/2), (WINDOW_HEIGTH/2)-(player.getPlayerHeight()/2));
         //FPS
         fps = new FPSLogger();
         showFPS = false;
         //Spritebatch
         batch = new SpriteBatch();
         //Camera
-        cam = new Camera((player.getPlayerX()+player.getPlayerWidth()/2),(player.getPlayerY()+player.getPlayerHeight()/2));
+        cam = new Camera((player.getPlayerX() + player.getPlayerWidth() / 2), (player.getPlayerY() + player.getPlayerHeight() / 2));
         //Level
         level = new Level(WINDOW_WIDTH * 3, WINDOW_HEIGTH);
         collisionArray = level.getCollisionArray();
@@ -66,14 +64,14 @@ public class Main extends ApplicationAdapter {
     }
 
     @Override
-    public void render() {
+    public void render(float f) {
         //Update the Camera
         cam.camUpdate(level.getBatchDynamic());
         //Clear the Screen
         Gdx.gl.glClearColor(255, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //player is dead
-        if(player.getPlayerState()==20){
+        if (player.getPlayerState() == 20) {
             this.create();
         }
         level.drawLevel();
@@ -84,44 +82,44 @@ public class Main extends ApplicationAdapter {
         player.update();
         //Batchdrawing
         batch.begin();
-        batch.draw(player.getCurrentFrame(),  player.getPlayerX(), player.getPlayerY());
+        batch.draw(player.getCurrentFrame(), player.getPlayerX(), player.getPlayerY());
         batch.end();
         //Combat
         player.combat();
-        collides= false;
+        collides = false;
         //Standard and trap collision
-        for (Iterator<Collision> iter = collisionArray.iterator(); iter.hasNext(); ) {
-            Collision element = iter.next();  
-            if((cam.getxPosition()-(player.getPlayerWidth()/2)) < (element.getStartX()+element.getStartWidth())  
-                    && (cam.getxPosition()+(player.getPlayerWidth()/2)) > element.getStartX()
-                    && (cam.getyPosition()+(player.getPlayerHeight()/2)) > element.getStartY()
-                    && (cam.getyPosition()-(player.getPlayerHeight()/2) < (element.getStartY()+element.getStartHeight()))){
+        for (Iterator<Collision> iter = collisionArray.iterator(); iter.hasNext();) {
+            Collision element = iter.next();
+            if ((cam.getxPosition() - (player.getPlayerWidth() / 2)) < (element.getStartX() + element.getStartWidth())
+                    && (cam.getxPosition() + (player.getPlayerWidth() / 2)) > element.getStartX()
+                    && (cam.getyPosition() + (player.getPlayerHeight() / 2)) > element.getStartY()
+                    && (cam.getyPosition() - (player.getPlayerHeight() / 2) < (element.getStartY() + element.getStartHeight()))) {
                 collides = true;
-                if(cam.getyPosition() < (element.getStartY()+element.getStartHeight())){
-                   cam.translate(0,(element.getStartY()+element.getStartHeight())-cam.getyPosition());
-                   cam.setyPosition((element.getStartY()+element.getStartHeight()));                    
+                if (cam.getyPosition() < (element.getStartY() + element.getStartHeight())) {
+                    cam.translate(0, (element.getStartY() + element.getStartHeight()) - cam.getyPosition());
+                    cam.setyPosition((element.getStartY() + element.getStartHeight()));
                 }
-                if(element.getDeadly()){
+                if (element.getDeadly()) {
                     player.death();
                 }
             }
         }
         //Enemy collision
-        for (Iterator<Enemy> iter = EnemyList.iterator(); iter.hasNext(); ) {
-            Collision element = iter.next().getCollision();  
-            if((cam.getxPosition()-(player.getPlayerWidth()/2)) < (element.getStartX()+element.getStartWidth())  
-                    && (cam.getxPosition()+(player.getPlayerWidth()/2)) > element.getStartX()
-                    && (cam.getyPosition()+(player.getPlayerHeight()/2)) > element.getStartY()
-                    && (cam.getyPosition()-(player.getPlayerHeight()/2) < (element.getStartY()+element.getStartHeight()))){
+        for (Iterator<Enemy> iter = EnemyList.iterator(); iter.hasNext();) {
+            Collision element = iter.next().getCollision();
+            if ((cam.getxPosition() - (player.getPlayerWidth() / 2)) < (element.getStartX() + element.getStartWidth())
+                    && (cam.getxPosition() + (player.getPlayerWidth() / 2)) > element.getStartX()
+                    && (cam.getyPosition() + (player.getPlayerHeight() / 2)) > element.getStartY()
+                    && (cam.getyPosition() - (player.getPlayerHeight() / 2) < (element.getStartY() + element.getStartHeight()))) {
                 collides = true;
-                if(element.getDeadly()){
+                if (element.getDeadly()) {
                     player.death();
                 }
             }
         }
-        if(collides){
+        if (collides) {
             cam.setCollides(true);
-        }else{
+        } else {
             cam.setCollides(false);
         }
         //FPS
@@ -136,8 +134,33 @@ public class Main extends ApplicationAdapter {
         level.getBatchDynamic().dispose();
         batch.dispose();
     }
-    
-    public void collision(){
-    
+
+    public void collision() {
+
+    }
+
+    @Override
+    public void show() {
+        create();
+    }
+
+    @Override
+    public void resize(int i, int i1) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void pause() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void resume() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void hide() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

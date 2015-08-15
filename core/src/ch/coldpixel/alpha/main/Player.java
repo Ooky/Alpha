@@ -6,6 +6,7 @@
 package ch.coldpixel.alpha.main;
 
 import ch.coldpixel.alpha.level.TextureLoader;
+import static ch.coldpixel.alpha.main.Constants.WINDOW_WIDTH;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -155,7 +156,7 @@ public class Player {
 //            isSwinging = true;
             batch.begin();
             //textureregion, floatx, floaty, rotationpointx, rotationpointy, width, height, scalex, scaley, rotation, clockwise
-            if (Gdx.input.getX() >= (Main.WINDOW_WIDTH / 2)) {//Mouse is in the right half
+            if (Gdx.input.getX() >= (WINDOW_WIDTH / 2)) {//Mouse is in the right half
                 swingSpeed = -5;
                 swordSide = playerWidth - 10;
                 batch.draw(textureLoader.getSword(), getPlayerX() + swordSide, getPlayerY() + 15, 0, 0, 16, 16, 3, 3, swordRadiusRight);

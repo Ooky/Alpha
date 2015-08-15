@@ -6,7 +6,8 @@
 package ch.coldpixel.alpha.level;
 
 import ch.coldpixel.alpha.main.Collision;
-import ch.coldpixel.alpha.main.Main;
+import static ch.coldpixel.alpha.main.Constants.WINDOW_HEIGTH;
+import static ch.coldpixel.alpha.main.Constants.WINDOW_WIDTH;
 import ch.coldpixel.alpha.npc.Enemy;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -81,7 +82,7 @@ public class Level {
         //Background
         batchStatic.begin();
         //Fills the whole visible Window
-        drawRegion(true, cloud, 0, -30, Main.WINDOW_WIDTH / 16, Main.WINDOW_HEIGTH / 32, 16, 32,false, false);
+        drawRegion(true, cloud, 0, -30, WINDOW_WIDTH / 16, WINDOW_HEIGTH / 32, 16, 32,false, false);
         batchStatic.end();
 //------------------------------------------------------------------------------
 //Dynamic Batch. This will move when the player/cam moves
