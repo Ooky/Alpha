@@ -36,6 +36,7 @@ public class TextureLoader {
     private final TextureRegion surface2;
     private final TextureRegion surfaceToGround;
     private final TextureRegion ground0;
+    private final TextureRegion backGround0;
 
 //==============================================================================
 //Methods
@@ -58,6 +59,7 @@ public class TextureLoader {
         surface2 = new TextureRegion(terrain, 37, 5, 16, 16);
         surfaceToGround = new TextureRegion(terrain, 5, 21, 16, 16);
         ground0 = new TextureRegion(terrain, 5, 37, 16, 16);
+        backGround0 = new TextureRegion(terrain, 21, 37, 16,16);
 
     }
 
@@ -106,6 +108,10 @@ public class TextureLoader {
 
     public TextureRegion getSurfaceToGround() {
         return surfaceToGround;
+    }
+
+    public TextureRegion getBackGround0() {
+        return backGround0;
     }
 
 }

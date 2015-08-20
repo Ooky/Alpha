@@ -36,6 +36,7 @@ public class Level {
     private final TextureRegion arrSurface[];
     private final TextureRegion surfaceToGround;
     private final TextureRegion ground0;
+    private final TextureRegion backGround0;
     //Environment
     private final TextureRegion stairs;
     private final TextureRegion spikeTrap;
@@ -74,6 +75,7 @@ public class Level {
         arrSurface[2] = textureLoader.getSurface2();
         surfaceToGround = textureLoader.getSurfaceToGround();
         ground0 = textureLoader.getGround0();
+        backGround0 = textureLoader.getBackGround0();
         //Spritebatch
         batchDynamic = new SpriteBatch();
         batchStatic = new SpriteBatch();
@@ -118,6 +120,9 @@ public class Level {
         //Terrain old        
         drawRegion(false, surfaceToGround, 0, 16, 35, 1, 16, 16, true, false);
         drawRegion(false, ground0, 0, 0, 35, 1, 16, 16, true, false);
+        drawRegion(false, ground0, 0, -16, 35, 1, 16, 16, true, false);
+        //Background
+        drawRegion(false, backGround0, 0, 32, 30, 10, 16, 16, false, false);
         //Surface
         for (int i = 0; i < arrRandom.size(); i++) {
             //Generates surface, based on random generated numbers in arrRandom
