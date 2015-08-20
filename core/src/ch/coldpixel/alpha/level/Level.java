@@ -33,10 +33,9 @@ public class Level {
     private final TextureRegion ground;
     private final TextureRegion groundTop;
     //Terrain
-    private final TextureRegion surface0;
-    private final TextureRegion surface1;
-    private final TextureRegion surface2;
     private final TextureRegion arrSurface[];
+    private final TextureRegion surfaceToGround;
+    private final TextureRegion ground0;
     //Environment
     private final TextureRegion stairs;
     private final TextureRegion spikeTrap;
@@ -69,13 +68,12 @@ public class Level {
         stairs = textureLoader.getStairs();
         spikeTrap = textureLoader.getSpikeTrap();
         //Terrain
-        surface0 = textureLoader.getSurface0();
-        surface1 = textureLoader.getSurface1();
-        surface2 = textureLoader.getSurface2();
         arrSurface = new TextureRegion[3];
-        arrSurface[0] = surface0;
-        arrSurface[1] = surface1;
-        arrSurface[2] = surface2;
+        arrSurface[0] = textureLoader.getSurface0();
+        arrSurface[1] = textureLoader.getSurface1();
+        arrSurface[2] = textureLoader.getSurface2();
+        surfaceToGround = textureLoader.getSurfaceToGround();
+        ground0 = textureLoader.getGround0();
         //Spritebatch
         batchDynamic = new SpriteBatch();
         batchStatic = new SpriteBatch();
@@ -114,11 +112,12 @@ public class Level {
 //Careful, ALL booleans MUST be false(only first)
 //------------------------------------------------------------------------------
         batchDynamic.begin();
-        //Ground
-//        drawRegion(false, groundTop, 0, 32, 35, 1, 16, 16, true, false);
+        //Terrain new
         drawRegion(false, groundTop, 760, 32, 100, 1, 16, 16, true, false);
-        drawRegion(false, ground, 0, 0, 35, 2, 16, 16, true, false);
         drawRegion(false, ground, 760, 0, 100, 2, 16, 16, true, false);
+        //Terrain old        
+        drawRegion(false, surfaceToGround, 0, 16, 35, 1, 16, 16, true, false);
+        drawRegion(false, ground0, 0, 0, 35, 1, 16, 16, true, false);
         //Surface
         for (int i = 0; i < arrRandom.size(); i++) {
             //Generates surface, based on random generated numbers in arrRandom

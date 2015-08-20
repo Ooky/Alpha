@@ -34,6 +34,8 @@ public class TextureLoader {
     private final TextureRegion surface0;
     private final TextureRegion surface1;
     private final TextureRegion surface2;
+    private final TextureRegion surfaceToGround;
+    private final TextureRegion ground0;
 
 //==============================================================================
 //Methods
@@ -52,8 +54,10 @@ public class TextureLoader {
         //Terrain
         terrain = new Texture(Gdx.files.internal("Graphics/Terrain/Terrain.png"));
         surface0 = new TextureRegion(terrain, 5, 5, 16, 16);
-        surface1 = new TextureRegion(terrain,21,5,16,16);
-        surface2 = new TextureRegion(terrain,37,5,16,16);
+        surface1 = new TextureRegion(terrain, 21, 5, 16, 16);
+        surface2 = new TextureRegion(terrain, 37, 5, 16, 16);
+        surfaceToGround = new TextureRegion(terrain, 5, 21, 16, 16);
+        ground0 = new TextureRegion(terrain, 5, 37, 16, 16);
 
     }
 
@@ -87,10 +91,21 @@ public class TextureLoader {
     public TextureRegion getSurface0() {
         return surface0;
     }
+
     public TextureRegion getSurface1() {
         return surface1;
     }
+
     public TextureRegion getSurface2() {
         return surface2;
     }
+
+    public TextureRegion getGround0() {
+        return ground0;
+    }
+
+    public TextureRegion getSurfaceToGround() {
+        return surfaceToGround;
+    }
+
 }
