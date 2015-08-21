@@ -137,7 +137,7 @@ public class Camera {
 //Combat Clickfunction
 //------------------------------------------------------------------------------
         //should check if players combat function is activ and change
-        //the animation to the starndard animation
+        //the animation to the standard animation
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             if(player.getPlayerState() == 1){
                 player.setPlayerState(0);

@@ -88,7 +88,7 @@ public class Main implements Screen {
         batch.end();
         //Combat
         player.combat();
-       collision();
+        collision();
     }
 
     @Override

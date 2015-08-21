@@ -34,8 +34,13 @@ public class TextureLoader {
     private final TextureRegion surface0;
     private final TextureRegion surface1;
     private final TextureRegion surface2;
-    private final TextureRegion surfaceToGround;
+    private final TextureRegion surfaceToGround0;
+    private final TextureRegion surfaceToGround1;
+    private final TextureRegion surfaceToGround2;
+    private final TextureRegion backSurfaceToGround0;
     private final TextureRegion ground0;
+    private final TextureRegion ground1;
+    private final TextureRegion ground2;
     private final TextureRegion backGround0;
 
 //==============================================================================
@@ -54,12 +59,22 @@ public class TextureLoader {
         sword = new TextureRegion(itemList, 0, 0, 24, 24);
         //Terrain
         terrain = new Texture(Gdx.files.internal("Graphics/Terrain/Terrain.png"));
-        surface0 = new TextureRegion(terrain, 5, 5, 16, 16);
-        surface1 = new TextureRegion(terrain, 21, 5, 16, 16);
-        surface2 = new TextureRegion(terrain, 37, 5, 16, 16);
-        surfaceToGround = new TextureRegion(terrain, 5, 21, 16, 16);
-        ground0 = new TextureRegion(terrain, 5, 37, 16, 16);
-        backGround0 = new TextureRegion(terrain, 21, 37, 16,16);
+        
+        surface0 = new TextureRegion(terrain, 11, 11, 16, 16);
+        surface1 = new TextureRegion(terrain, 27, 11, 16, 16);
+        surface2 = new TextureRegion(terrain, 43, 11, 16, 16);
+        
+        surfaceToGround0 = new TextureRegion(terrain, 11, 27, 16, 16);
+        surfaceToGround1 = new TextureRegion(terrain, 27, 27, 16, 16);
+        surfaceToGround2 = new TextureRegion(terrain, 43, 27, 16, 16);
+        
+        backSurfaceToGround0 = new TextureRegion(terrain, 59, 27, 16, 16);
+        
+        ground0 = new TextureRegion(terrain, 11, 43, 16, 16);
+        ground1 = new TextureRegion(terrain, 27, 43, 16, 16);
+        ground2 = new TextureRegion(terrain, 43, 43, 16, 16);
+        
+        backGround0 = new TextureRegion(terrain, 59, 43, 16, 16);
 
     }
 
@@ -106,8 +121,28 @@ public class TextureLoader {
         return ground0;
     }
 
-    public TextureRegion getSurfaceToGround() {
-        return surfaceToGround;
+    public TextureRegion getGround1() {
+        return ground1;
+    }
+
+    public TextureRegion getGround2() {
+        return ground2;
+    }
+
+    public TextureRegion getSurfaceToGround0() {
+        return surfaceToGround0;
+    }
+
+    public TextureRegion getSurfaceToGround1() {
+        return surfaceToGround1;
+    }
+
+    public TextureRegion getSurfaceToGround2() {
+        return surfaceToGround2;
+    }
+
+    public TextureRegion getBackSurfaceToGround0() {
+        return backSurfaceToGround0;
     }
 
     public TextureRegion getBackGround0() {
