@@ -44,8 +44,8 @@ public class Enemy {
 //==============================================================================
     public Enemy(float enemyX, float enemyY) {
         //PlayerSize
-        this.enemyWidth = 16;
-        this.enemyHeight = 16;
+        this.enemyWidth = 32;
+        this.enemyHeight = 32;
         //Texture
         texture = new Texture("Graphics/NPC/Enemy.png");
         enemyTexture = new TextureRegion(texture, enemyWidth, enemyHeight);

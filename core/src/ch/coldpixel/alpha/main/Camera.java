@@ -31,7 +31,8 @@ public class Camera {
     //Gravitation
     private float increasingFallSpeed;
     private boolean collides;
-    private boolean sideCollides;
+    private boolean sideCollidesLeft;
+    private boolean sideCollidesRight;
     //Player
     Player player;
     //Camera Position( collision)
@@ -52,7 +53,8 @@ public class Camera {
         //Gravitation
         increasingFallSpeed=player.getFallSpeed();
         collides = false;
-        sideCollides=false;
+        sideCollidesLeft=false;
+        sideCollidesRight=false;
         //Camera Positon
         xPosition = xPos;
         yPosition = yPos;
@@ -87,23 +89,21 @@ public class Camera {
             time -= WAIT_TIME;
         } else if (leftOrA()) {
             if (isRunning()) {
-                runLeft();
+                if(!sideCollidesLeft){runLeft();}
                 player.setPlayerState(3);
             } else {
-                walkLeft();
+               if(!sideCollidesLeft){walkLeft();}
                 player.setPlayerState(3);
             }
-
             time = 0;
         } else if (rightOrD()) {
             if (isRunning()) {
-                runRight();
+                if(!sideCollidesRight){runRight();}
                 player.setPlayerState(2);
             } else {
-                walkRight();
+                if(!sideCollidesRight){walkRight();}
                 player.setPlayerState(2);
             }
-
             time = 0;
         } else {
             if (player.getPlayerState() != 1)
@@ -157,7 +157,7 @@ private void gravity(){
     }else{
         player.setIsFalling(true);
     }
-    if(!collides || (sideCollides && !collides)){
+    if(!collides /*|| (sideCollidesLeft && !collides) || (sideCollidesRight && !collides)*/){
         //gravity movment
         if(player.getIsFalling()){
             player.setPlayerState(4);
@@ -224,8 +224,12 @@ private void gravity(){
         return collides;
     }    
     
-    public boolean getSideCollides() {
-        return collides;
+    public boolean getSideCollidesLeft() {
+        return sideCollidesLeft;
+    }    
+    
+    public boolean getSideCollidesRight() {
+        return sideCollidesRight;
     }    
     
     //==============================================================================
@@ -244,8 +248,12 @@ private void gravity(){
         this.collides = collides;
     }    
     
-    public void setSideCollides(boolean sideCollides) {
-        this.sideCollides = sideCollides;
+    public void setSideCollidesLeft(boolean sideCollidesLeft) {
+        this.sideCollidesLeft = sideCollidesLeft;
+    }    
+    
+    public void setSideCollidesRight(boolean sideCollidesRight) {
+        this.sideCollidesRight = sideCollidesRight;
     }    
     
     public void translate(float x, float y){
