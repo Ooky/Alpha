@@ -101,30 +101,32 @@ public class Main implements Screen {
 
     public void collision() {
         collides = false;
+        sideCollidesLeft=false;
+        sideCollidesRight=false;
         //Standard and trap collision
         for (Iterator<Collision> iter = collisionArray.iterator(); iter.hasNext();) {
             Collision element = iter.next();
-            if ((cam.getxPosition() - (player.getPlayerWidth() / 2)) < 5+(element.getStartX() + element.getStartWidth())
-                    && (cam.getxPosition() + (player.getPlayerWidth() / 2)) > element.getStartX()-5
+            if ((cam.getxPosition() - (player.getPlayerWidth() / 2)) < (element.getStartX() + element.getStartWidth())
+                    && (cam.getxPosition() + (player.getPlayerWidth() / 2)) > element.getStartX()
                     && (cam.getyPosition() + (player.getPlayerHeight() / 2)) > element.getStartY()
-                    && (cam.getyPosition() - (player.getPlayerHeight() / 2) < (element.getStartY() + element.getStartHeight()))) {
-                sideCollidesLeft=false;
-                sideCollidesRight=false;
+                    && (cam.getyPosition() - (player.getPlayerHeight() / 2) < (element.getStartY() + element.getStartHeight()))) {                
                 //Collision right of the Player
-                if (cam.getxPosition()+player.getPlayerWidth()/2 <= (element.getStartX()))
+                if (cam.getxPosition()+player.getPlayerWidth()/2 >= (element.getStartX())
+                        && cam.getxPosition()+player.getPlayerWidth()/2 <= (element.getStartX()+10))
                 {
                    /* cam.translate(element.getStartX()-player.getPlayerWidth()/2-5 - cam.getxPosition(),0 );
                     cam.setxPosition(element.getStartX()-player.getPlayerWidth()/2-5);*/
                     sideCollidesRight=true;
                 }
                 //Collision left of the Player
-                else if (cam.getxPosition()-player.getPlayerWidth()/2-1 >= (element.getStartX()+element.getStartWidth())) {
+                else if (cam.getxPosition()-player.getPlayerWidth()/2 >= (element.getStartX()+element.getStartWidth()-10)
+                        && cam.getxPosition()-player.getPlayerWidth()/2 <= (element.getStartX()+element.getStartWidth())) {
                   /*  cam.translate(element.getStartX()+element.getStartWidth()+player.getPlayerWidth()/2+5 - cam.getxPosition(),0 );
                     cam.setxPosition(element.getStartX()+element.getStartWidth()+player.getPlayerWidth()/2+5);*/
                     sideCollidesLeft=true;
                 }
                 //Collision under the Player
-                else if ((cam.getyPosition()-player.getPlayerHeight()/2 <= (element.getStartY() + element.getStartHeight())) && !sideCollidesLeft && !sideCollidesRight) {
+                else if ((cam.getyPosition()-player.getPlayerHeight()/2 <= (element.getStartY() + element.getStartHeight()))) {
                     cam.translate(0, (player.getPlayerHeight()/2)+(element.getStartY() + element.getStartHeight())-1 - cam.getyPosition());
                     cam.setyPosition((player.getPlayerHeight()/2)+(element.getStartY() + element.getStartHeight())-1);
                     collides = true;
@@ -147,11 +149,7 @@ public class Main implements Screen {
                 }
             }
         }
-        if (collides) {
-            cam.setCollides(true);
-        } else {
-            cam.setCollides(false);
-        }
+        cam.setCollides(collides);
         cam.setSideCollidesRight(sideCollidesRight);
         cam.setSideCollidesLeft(sideCollidesLeft);
         //FPS
