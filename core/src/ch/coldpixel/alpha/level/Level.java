@@ -28,7 +28,7 @@ public class Level {
     private final int levelWidth;
     private final int levelHeight;
     //TextureLoader
-    private final TextureLoader textureLoader;
+    private final TextureLoader tl;
     //Surface
     private final TextureRegion arrSurface[];
     //SurfaceToGround
@@ -45,7 +45,8 @@ public class Level {
     private final List EnemyArray;
     //Random
     private final Random rnd;
-    private final ArrayList<Integer> arrRandom;
+    private final ArrayList<Integer> arrRandomSurface0;
+    private final ArrayList<Integer> arrRandomSurface1;
 
 //==============================================================================
 //Methods
@@ -55,24 +56,24 @@ public class Level {
         this.levelWidth = levelWidth;
         this.levelHeight = levelHeight;
         //TextureLoader
-        textureLoader = new TextureLoader();
+        tl = new TextureLoader();
         //Surface
         arrSurface = new TextureRegion[3];
-        arrSurface[0] = textureLoader.getSurface0();
-        arrSurface[1] = textureLoader.getSurface1();
-        arrSurface[2] = textureLoader.getSurface2();
+        arrSurface[0] = tl.getSurface0();
+        arrSurface[1] = tl.getSurface1();
+        arrSurface[2] = tl.getSurface2();
         //SurfaceToGround
         arrSurfaceToGround = new TextureRegion[3];
-        arrSurfaceToGround[0] = textureLoader.getSurfaceToGround0();
-        arrSurfaceToGround[1] = textureLoader.getSurfaceToGround1();
-        arrSurfaceToGround[2] = textureLoader.getSurfaceToGround2();
+        arrSurfaceToGround[0] = tl.getSurfaceToGround0();
+        arrSurfaceToGround[1] = tl.getSurfaceToGround1();
+        arrSurfaceToGround[2] = tl.getSurfaceToGround2();
         //Spritebatch
         batchDynamic = new SpriteBatch();
         batchStatic = new SpriteBatch();
         //Enemy
         enemy = new Enemy(250, 32);
         enemy.setWaitTimer(0.8f);
-        enemy2 = new Enemy(2320, 48);
+        enemy2 = new Enemy(2320, 32);
         enemy2.setWaitTimer(2f);
         //Collision
         collisionArray = new ArrayList();
@@ -81,10 +82,14 @@ public class Level {
         EnemyArray.add(enemy2);
         //Random
         rnd = new Random();
-        arrRandom = new ArrayList<Integer>();
+        arrRandomSurface0 = new ArrayList<Integer>();
+        arrRandomSurface1 = new ArrayList<Integer>();
+        //Adds  numbers from 0-3 to arrRandom
         for (int i = 0; i < (35 * 16); i += 16) {
-            //Adds  numbers from 0-3 to arrRandom
-            arrRandom.add(rnd.nextInt(3) + 0);
+            arrRandomSurface0.add(rnd.nextInt(3) + 0);
+        }
+        for (int i = 0; i < (40 * 16); i += 16) {
+            arrRandomSurface1.add(rnd.nextInt(3) + 0);
         }
     }
 
@@ -97,50 +102,79 @@ public class Level {
         //Background
         batchStatic.begin();
         //Fills the whole visible Window
-        drawRegion(true, textureLoader.getCloud(), 0, -30, WINDOW_WIDTH / 16, WINDOW_HEIGTH / 32, 16, 32, false, false);
+        drawRegion(true, tl.getCloud(), 0, -30, WINDOW_WIDTH / 16, WINDOW_HEIGTH / 32, 16, 32, false, false);
         batchStatic.end();
 //------------------------------------------------------------------------------
 //Dynamic Batch. This will move when the player/cam moves
 //Careful, ALL booleans MUST be false(only first)
 //------------------------------------------------------------------------------
         batchDynamic.begin();
-        //Terrain old
-        drawRegion(false, textureLoader.getGroundTop(), 760, 32, 100, 1, 16, 16, true, false);
-        drawRegion(false, textureLoader.getGround(), 760, 0, 100, 2, 16, 16, true, false);
-        //Terrain new
+//------LEFT
+        //Background
+        drawRegion(false, tl.getBackGround0(), 0, 32, 30, 10, 16, 16, false, false);
+        //Surface
+        for (int i = 0; i < arrRandomSurface0.size(); i++) {
+            //Generates surface, based on random generated numbers in arrRandom
+            drawRegion(false, arrSurface[arrRandomSurface0.get(i)], i * 16, 32, 1, 1, 16, 16, false, false);
+        }
         //->this 2 lines are redudant, the foor loop would be enough IF collision = true
         //but if you set collision = true, then it bugs, so i draw first a texture to make
         //sure it collides, then draw my original random texture over it
         //needs to be fixed
-        drawRegion(false, textureLoader.getSurfaceToGround0(), 0, 16, 35, 1, 16, 16, true, false);
-        for (int i = 0; i < arrRandom.size(); i++) {
-            drawRegion(false, arrSurfaceToGround[arrRandom.get(i)], i * 16, 16, 1, 1, 16, 16, false, false);
+
+        //Surface to Ground
+        drawRegion(false, tl.getEmptyTexture(), 0, 28, 560, 1, 1, 1, true, false);
+        for (int i = 0; i < arrRandomSurface0.size(); i++) {
+            drawRegion(false, arrSurfaceToGround[arrRandomSurface0.get(i)], i * 16, 16, 1, 1, 16, 16, false, false);
         }
-        drawRegion(false, textureLoader.getGround0(), 0, 0, 35, 1, 16, 16, false, false);
-        drawRegion(false, textureLoader.getGround0(), 0, -16, 35, 1, 16, 16, false, false);
-        //Background
-        drawRegion(false, textureLoader.getBackGround0(), 0, 32, 30, 10, 16, 16, false, false);
-        //Surface
-        for (int i = 0; i < arrRandom.size(); i++) {
-            //Generates surface, based on random generated numbers in arrRandom
-            drawRegion(false, arrSurface[arrRandom.get(i)], i * 16, 32, 1, 1, 16, 16, false, false);
-        }
-        //Drawing Stairs
-        drawRegion(false, textureLoader.getStairs(), 888, 48, 20, 2, 16, 16, true, false);
-        drawRegion(false, textureLoader.getStairs(), 952, 80, 16, 2, 16, 16, true, false);
-        drawRegion(false, textureLoader.getStairs(), 1016, 112, 12, 2, 16, 16, true, false);
-        drawRegion(false, textureLoader.getStairs(), 1080, 144, 8, 2, 16, 16, true, false);
-        drawRegion(false, textureLoader.getStairs(), 1144, 176, 4, 2, 16, 16, true, false);
-        //Drawing Spike Trap
-        drawRegion(false, textureLoader.getSpikeTrap(), 1208, 48, 12, 1, 16, 16, true, true);
-        //Drawing Stairs
-        drawRegion(false, textureLoader.getStairs(), 1388, 48, 20, 2, 16, 16, true, false);
-        drawRegion(false, textureLoader.getStairs(), 1388, 80, 16, 2, 16, 16, true, false);
-        drawRegion(false, textureLoader.getStairs(), 1388, 112, 12, 2, 16, 16, true, false);
-        drawRegion(false, textureLoader.getStairs(), 1388, 144, 8, 2, 16, 16, true, false);
-        drawRegion(false, textureLoader.getStairs(), 1388, 176, 4, 2, 16, 16, true, false);
+        //Ground
+        drawRegion(false, tl.getGround0(), 0, 0, 35, 1, 16, 16, false, false);
+        drawRegion(false, tl.getGround0(), 0, -16, 35, 1, 16, 16, false, false);
+
         //Enemy
         drawRegion(false, enemy.getEnemyTexture(), (int) enemy.getEnemyX(), (int) enemy.getEnemyY(), 1, 1, 16, 16, false, false);
+
+//------RIGHT
+        drawRegion(false, tl.getSurface0(), 760, 32, 2, 1, 16, 16, false, false);
+        drawRegion(false, tl.getSurface1(), 792, 32, 2, 1, 16, 16, false, false);
+        drawRegion(false, tl.getSurface0(), 824, 32, 2, 1, 16, 16, false, false);
+        drawRegion(false, tl.getSurface2(), 856, 32, 2, 1, 16, 16, false, false);
+
+        drawRegion(false, tl.getEmptyTexture(), 760, 28, 1600, 1, 1, 1, true, false);
+        drawRegion(false, tl.getSurfaceToGround0(), 760, 16, 2, 1, 16, 16, false, false);
+        drawRegion(false, tl.getSurfaceToGround1(), 792, 16, 2, 1, 16, 16, false, false);
+        drawRegion(false, tl.getSurfaceToGround2(), 824, 16, 2, 1, 16, 16, false, false);
+        drawRegion(false, tl.getSurfaceToGround0(), 856, 16, 2, 1, 16, 16, false, false);
+//        
+        drawRegion(false, tl.getGround0(), 760, -16, 100, 2, 16, 16, true, true);
+
+        drawRegion(false, tl.getGround0(), 888, 16, 52, 1, 16, 16, false, false);
+
+        //Stairs
+        drawRegion(false, tl.getStairs0(), 888, 32, 20, 2, 16, 16, true, false);
+        drawRegion(false, tl.getStairs0(), 952, 64, 16, 2, 16, 16, true, false);
+        drawRegion(false, tl.getStairs0(), 1016, 96, 12, 2, 16, 16, true, false);
+        drawRegion(false, tl.getStairs0(), 1080, 128, 8, 2, 16, 16, true, false);
+        drawRegion(false, tl.getStairs0(), 1144, 160, 4, 2, 16, 16, true, false);
+        //Spike Trap
+        drawRegion(false, tl.getSpikeTrap0(), 1208, 32, 12, 1, 16, 16, true, true);
+        //Stairs
+        drawRegion(false, tl.getStairs0(), 1400, 32, 20, 2, 16, 16, true, false);
+        drawRegion(false, tl.getStairs0(), 1400, 64, 16, 2, 16, 16, true, false);
+        drawRegion(false, tl.getStairs0(), 1400, 96, 12, 2, 16, 16, true, false);
+        drawRegion(false, tl.getStairs0(), 1400, 128, 8, 2, 16, 16, true, false);
+        drawRegion(false, tl.getStairs0(), 1400, 160, 4, 2, 16, 16, true, false);
+
+        for (int i = 0; i < arrRandomSurface1.size(); i++) {
+            //Generates surface, based on random generated numbers in arrRandom
+            drawRegion(false, arrSurface[arrRandomSurface1.get(i)], i * 16 + 1720, 32, 1, 1, 16, 16, false, false);
+        }
+        //Surface to Ground
+        for (int i = 0; i < arrRandomSurface1.size(); i++) {
+            drawRegion(false, arrSurfaceToGround[arrRandomSurface1.get(i)], i * 16+1720, 16, 1, 1, 16, 16, false, false);
+        }
+
+        //Enemy
         drawRegion(false, enemy2.getEnemyTexture(), (int) enemy2.getEnemyX(), (int) enemy2.getEnemyY(), 1, 1, 16, 16, false, false);
         levelIsDrawn = true;
         batchDynamic.end();

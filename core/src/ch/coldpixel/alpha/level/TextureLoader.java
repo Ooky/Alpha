@@ -21,11 +21,6 @@ public class TextureLoader {
     //Background
     private final Texture backgroundTexture;
     public final TextureRegion cloud;
-    private final TextureRegion ground;
-    private final TextureRegion groundTop;
-    //Environment
-    private final TextureRegion stairs;
-    private final TextureRegion SpikeTrap;
     //Items
     private final Texture itemList;
     private final TextureRegion sword;
@@ -42,39 +37,49 @@ public class TextureLoader {
     private final TextureRegion ground1;
     private final TextureRegion ground2;
     private final TextureRegion backGround0;
+    private final TextureRegion stairs0;
+    private final TextureRegion SpikeTrap0;
+    //Just for Collision, not really great, should be change if collision works
+    private final TextureRegion emptyTexture;
 
 //==============================================================================
 //Methods
 //==============================================================================
     public TextureLoader() {
-        //Background
+//------------------------------------------------------------------------------
+//Background
+//------------------------------------------------------------------------------
         backgroundTexture = new Texture(Gdx.files.internal("Graphics/Background/BackgroundRegion.png"));
-        cloud = new TextureRegion(backgroundTexture, 0, 32, 16, 62);
-        ground = new TextureRegion(backgroundTexture, 0, 16, 16, 16);
-        groundTop = new TextureRegion(backgroundTexture, 0, 0, 16, 16);
-        stairs = new TextureRegion(backgroundTexture, 16, 0, 16, 16);
-        SpikeTrap = new TextureRegion(backgroundTexture, 16, 16, 16, 16);
+        cloud = new TextureRegion(backgroundTexture, 0, 0, 16, 62);
         //Items
         itemList = new Texture(Gdx.files.internal("Graphics/Items/itemList.png"));
         sword = new TextureRegion(itemList, 0, 0, 24, 24);
-        //Terrain
+//------------------------------------------------------------------------------
+//Terrain
+//------------------------------------------------------------------------------
         terrain = new Texture(Gdx.files.internal("Graphics/Terrain/Terrain.png"));
-        
+        //Just for Collision, not really great, should be change if collision works
+        emptyTexture = new TextureRegion(terrain, 11, 11, 1, 1);
+        //Surface
         surface0 = new TextureRegion(terrain, 11, 11, 16, 16);
         surface1 = new TextureRegion(terrain, 27, 11, 16, 16);
         surface2 = new TextureRegion(terrain, 43, 11, 16, 16);
-        
+        //Surface to Ground
         surfaceToGround0 = new TextureRegion(terrain, 11, 27, 16, 16);
         surfaceToGround1 = new TextureRegion(terrain, 27, 27, 16, 16);
         surfaceToGround2 = new TextureRegion(terrain, 43, 27, 16, 16);
-        
+        //background Surface to Ground
         backSurfaceToGround0 = new TextureRegion(terrain, 59, 27, 16, 16);
-        
+        //Ground
         ground0 = new TextureRegion(terrain, 11, 43, 16, 16);
         ground1 = new TextureRegion(terrain, 27, 43, 16, 16);
         ground2 = new TextureRegion(terrain, 43, 43, 16, 16);
-        
+        //Background ground
         backGround0 = new TextureRegion(terrain, 59, 43, 16, 16);
+        //Stairs
+        stairs0 = new TextureRegion(terrain, 11, 59, 16, 16);
+        //Traps
+        SpikeTrap0 = new TextureRegion(terrain, 11, 75, 16, 16);
 
     }
 
@@ -85,20 +90,12 @@ public class TextureLoader {
         return cloud;
     }
 
-    public TextureRegion getGround() {
-        return ground;
+    public TextureRegion getStairs0() {
+        return stairs0;
     }
 
-    public TextureRegion getGroundTop() {
-        return groundTop;
-    }
-
-    public TextureRegion getStairs() {
-        return stairs;
-    }
-
-    public TextureRegion getSpikeTrap() {
-        return SpikeTrap;
+    public TextureRegion getSpikeTrap0() {
+        return SpikeTrap0;
     }
 
     public TextureRegion getSword() {
@@ -147,6 +144,10 @@ public class TextureLoader {
 
     public TextureRegion getBackGround0() {
         return backGround0;
+    }
+
+    public TextureRegion getEmptyTexture() {
+        return emptyTexture;
     }
 
 }
