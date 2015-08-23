@@ -111,7 +111,9 @@ public class Level {
         batchDynamic.begin();
 //------LEFT
         //Background
-        drawRegion(false, tl.getBackGround0(), 0, 32, 30, 10, 16, 16, false, false);
+        drawRegion(false, tl.getBackgroundLevel1(), -200, -200, 2, 1, 1920, 1200, false, false);
+        drawRegion(false, tl.getBackGround0(), 0, -320, 147, 19, 16, 16, false, false);
+        //drawRegion(false, tl.getBackGround0(), 760, 32, 35, 10, 16, 16, false, false);
         //Surface
         for (int i = 0; i < arrRandomSurface0.size(); i++) {
             //Generates surface, based on random generated numbers in arrRandom
@@ -146,7 +148,7 @@ public class Level {
         drawRegion(false, tl.getSurfaceToGround2(), 824, 16, 2, 1, 16, 16, false, false);
         drawRegion(false, tl.getSurfaceToGround0(), 856, 16, 2, 1, 16, 16, false, false);
 //        
-        drawRegion(false, tl.getGround0(), 760, -16, 100, 2, 16, 16, true, true);
+        drawRegion(false, tl.getGround0(), 760, -16, 100, 2, 16, 16, true, false);
 
         drawRegion(false, tl.getGround0(), 888, 16, 52, 1, 16, 16, false, false);
 
