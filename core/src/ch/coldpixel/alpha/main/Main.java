@@ -131,8 +131,12 @@ public class Main implements Screen {
                     cam.setyPosition((player.getPlayerHeight()/2)+(element.getStartY() + element.getStartHeight())-1);
                     collides = true;
                 }
-                if (element.getDeadly()) {
-                    player.death();
+                switch (element.getFunction()) {
+                    case 2:player.death();
+                        break;
+                    case 3:
+                        System.out.println("WIN");
+                        break;
                 }
             }
         }
@@ -144,8 +148,12 @@ public class Main implements Screen {
                     && (cam.getyPosition() + (player.getPlayerHeight() / 2)) > element.getStartY()
                     && (cam.getyPosition() - (player.getPlayerHeight() / 2) < (element.getStartY() + element.getStartHeight()))) {
                 collides = true;
-                if (element.getDeadly()) {
-                    player.death();
+                switch (element.getFunction()) {
+                    case 2:player.death();
+                        break;
+                    case 3:
+                        System.out.println("WIN");
+                        break;
                 }
             }
         }

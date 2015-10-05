@@ -18,16 +18,16 @@ public class Collision {
     private  float startY;
     private final float startWidth;
     private final float startHeight;
-    private final boolean deadly;
+    private final int function;
 //==============================================================================
 //Constructor
 //==============================================================================
-    public Collision(float x, float y, float width, float height, boolean deadly){
+    public Collision(float x, float y, float width, float height, int function){
         startX=x;
         startY=y;
         startWidth=width;
         startHeight=height;
-        this.deadly=deadly;
+        this.function=function;
     }
 //==============================================================================
 //Getter
@@ -49,8 +49,8 @@ public class Collision {
         return startHeight;
     }
 
-    public boolean getDeadly() {
-        return deadly;
+    public int getFunction() {
+        return function;
     }    
     
 //==============================================================================

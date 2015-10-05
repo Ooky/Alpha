@@ -41,6 +41,9 @@ public class TextureLoader {
     private final TextureRegion backGround0;
     private final TextureRegion stairs0;
     private final TextureRegion SpikeTrap0;
+    //Destinations
+    private final Texture destination;
+    private final TextureRegion placeholder1;
     //Just for Collision, not really great, should be change if collision works
     private final TextureRegion emptyTexture;
 
@@ -85,7 +88,11 @@ public class TextureLoader {
         stairs0 = new TextureRegion(terrain, 11, 59, 16, 16);
         //Traps
         SpikeTrap0 = new TextureRegion(terrain, 11, 75, 16, 16);
-
+//------------------------------------------------------------------------------
+//Destination
+//------------------------------------------------------------------------------
+        destination = new Texture(Gdx.files.internal("Graphics/Destination/Destination.png"));
+        placeholder1 = new TextureRegion(destination,0,0,32,64);
     }
 
 //==============================================================================
@@ -158,4 +165,9 @@ public class TextureLoader {
     public TextureRegion getBackgroundLevel1() {
         return backLevel1;
     }
+
+    public TextureRegion getPlaceholder1() {
+        return placeholder1;
+    }
+    
 }

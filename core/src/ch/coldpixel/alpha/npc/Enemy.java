@@ -60,7 +60,7 @@ public class Enemy {
         WAIT_TIME = 1.8f;
         time =0f;
         //Collision
-        collision = new Collision(enemyX,enemyY,enemyWidth,enemyHeight, true);
+        collision = new Collision(enemyX,enemyY,enemyWidth,enemyHeight, 2);
     }
 
     public void update() {
