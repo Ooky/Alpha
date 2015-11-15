@@ -169,8 +169,14 @@ public class Main implements Screen {
                             actualLevel.drawRegion(false, arrSurfaceToGround[arrRandomSurface0.get(i)], i * 16, 16, 1, 1, 16, 16, false, 1);
                         }
                         //Ground
-                        actualLevel.drawRegion(false, tl.getGround0(), 0, 0, 35, 1, 16, 16, false, 1);
-                        actualLevel.drawRegion(false, tl.getGround0(), 0, -16, 35, 1, 16, 16, false, 1);
+                        TextureRegion ground;
+                        if(actualLevel == level1){
+                           ground = tl.getGround0();
+                        }else{
+                            ground = tl.getGround1();
+                        }
+                        actualLevel.drawRegion(false, ground, 0, 0, 35, 1, 16, 16, false, 1);
+                        actualLevel.drawRegion(false, ground, 0, -16, 35, 1, 16, 16, false, 1);
                         
                         
                         actualLevel.drawRegion(false, EnemyList.get(0).getEnemyTexture(), (int) EnemyList.get(0).getEnemyX(), (int) EnemyList.get(0).getEnemyY(), 1, 1, 16, 16, false, 1);
@@ -187,9 +193,9 @@ public class Main implements Screen {
                         actualLevel.drawRegion(false, tl.getSurfaceToGround2(), 824, 16, 2, 1, 16, 16, false, 1);
                         actualLevel.drawRegion(false, tl.getSurfaceToGround0(), 856, 16, 2, 1, 16, 16, false, 1);
                 //        
-                        actualLevel.drawRegion(false, tl.getGround0(), 760, -16, 100, 2, 16, 16, true, 1);
+                        actualLevel.drawRegion(false, ground, 760, -16, 100, 2, 16, 16, true, 1);
 
-                        actualLevel.drawRegion(false, tl.getGround0(), 888, 16, 52, 1, 16, 16, false, 1);
+                        actualLevel.drawRegion(false, ground, 888, 16, 52, 1, 16, 16, false, 1);
 
                         //Stairs
                         actualLevel.drawRegion(false, tl.getStairs0(), 888, 32, 20, 2, 16, 16, true, 1);
