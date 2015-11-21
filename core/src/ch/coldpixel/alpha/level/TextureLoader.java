@@ -21,31 +21,31 @@ public class TextureLoader {
     //Background
     private final Texture backgroundTexture;
     private final Texture backgroundFirstLevel;
-    public final TextureRegion cloud;
-    public final TextureRegion backLevel1;
+    public static TextureRegion cloud;                  //14
+    public static TextureRegion backLevel1;
     //Items
     private final Texture itemList;
     private final TextureRegion sword;
     //Terrain
     private final Texture terrain;
-    private final TextureRegion surface0;
-    private final TextureRegion surface1;
-    private final TextureRegion surface2;
-    private final TextureRegion surfaceToGround0;
-    private final TextureRegion surfaceToGround1;
-    private final TextureRegion surfaceToGround2;
-    private final TextureRegion backSurfaceToGround0;
-    private final TextureRegion ground0;
-    private final TextureRegion ground1;
-    private final TextureRegion ground2;
-    private final TextureRegion backGround0;
-    private final TextureRegion stairs0;
-    private final TextureRegion SpikeTrap0;
+    private  static TextureRegion surface0;               //01
+    private  static TextureRegion surface1;               //02
+    private  static TextureRegion surface2;               //03
+    private  static TextureRegion surfaceToGround0;       //04
+    private  static TextureRegion surfaceToGround1;       //05
+    private  static TextureRegion surfaceToGround2;       //06
+    private  static TextureRegion backSurfaceToGround0;   //07
+    private  static TextureRegion ground0;                //08
+    private  static TextureRegion ground1;                //09
+    private  static TextureRegion ground2;                //10
+    private  static TextureRegion backGround0;            //11
+    private  static TextureRegion stairs0;                //12
+    private  static TextureRegion SpikeTrap0;             //13
     //Destinations
-    private final Texture destination;
-    private final TextureRegion placeholder1;
+    private final Texture destination;                  
+    private  static TextureRegion placeholder1;           //50
     //Just for Collision, not really great, should be change if collision works
-    private final TextureRegion emptyTexture;
+    private  static TextureRegion emptyTexture;           //99
 
 //==============================================================================
 //Methods
@@ -98,76 +98,50 @@ public class TextureLoader {
 //==============================================================================
 //Getter
 //==============================================================================
-    public TextureRegion getCloud() {
-        return cloud;
+    public static TextureRegion getTextureRegion(int textureNumber){
+        switch(textureNumber){
+            case 1:
+                return surface0;
+            case 2:
+                 return surface1;
+            case 3:
+                 return surface2;
+            case 4:
+                 return surfaceToGround0;
+            case 5:
+                 return surfaceToGround1;
+            case 6:
+                 return surfaceToGround2;
+            case 7:
+                 return backSurfaceToGround0;
+            case 8:
+                 return ground0;
+            case 9:
+                 return ground1;
+            case 10:
+                 return ground2;
+            case 11:
+                 return backGround0;
+            case 12:
+                 return stairs0;
+            case 13:
+                 return SpikeTrap0;
+            case 14:
+                 return cloud;
+            case 50:
+                 return placeholder1;
+            case 99:
+                 return emptyTexture;
+            default:
+                return cloud;
+        }
     }
-
-    public TextureRegion getStairs0() {
-        return stairs0;
-    }
-
-    public TextureRegion getSpikeTrap0() {
-        return SpikeTrap0;
-    }
-
+    
     public TextureRegion getSword() {
         return sword;
     }
-
-    public TextureRegion getSurface0() {
-        return surface0;
-    }
-
-    public TextureRegion getSurface1() {
-        return surface1;
-    }
-
-    public TextureRegion getSurface2() {
-        return surface2;
-    }
-
-    public TextureRegion getGround0() {
-        return ground0;
-    }
-
-    public TextureRegion getGround1() {
-        return ground1;
-    }
-
-    public TextureRegion getGround2() {
-        return ground2;
-    }
-
-    public TextureRegion getSurfaceToGround0() {
-        return surfaceToGround0;
-    }
-
-    public TextureRegion getSurfaceToGround1() {
-        return surfaceToGround1;
-    }
-
-    public TextureRegion getSurfaceToGround2() {
-        return surfaceToGround2;
-    }
-
-    public TextureRegion getBackSurfaceToGround0() {
-        return backSurfaceToGround0;
-    }
-
-    public TextureRegion getBackGround0() {
-        return backGround0;
-    }
-
-    public TextureRegion getEmptyTexture() {
-        return emptyTexture;
-    }
-
-    public TextureRegion getBackgroundLevel1() {
+    
+    public static TextureRegion getBackgroundLevel1() {
         return backLevel1;
     }
-
-    public TextureRegion getPlaceholder1() {
-        return placeholder1;
-    }
-    
 }

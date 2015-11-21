@@ -27,8 +27,6 @@ public class Level {
     //Levelsize
     private final int levelWidth;
     private final int levelHeight;
-    //TextureLoader
-    protected final TextureLoader tl;
     //Surface
     protected final TextureRegion arrSurface[];
     //SurfaceToGround
@@ -52,8 +50,6 @@ public class Level {
         //Levelsize
         this.levelWidth = levelWidth;
         this.levelHeight = levelHeight;
-        //TextureLoader
-        tl = new TextureLoader();
         //Surface
         arrSurface = new TextureRegion[3];
         //SurfaceToGround
@@ -102,10 +98,6 @@ public class Level {
 //==============================================================================
 //Getter
 //==============================================================================
-
-    public TextureLoader getTl() {
-        return tl;
-    }
 
     public int getLevelWidth() {
         return levelWidth;
