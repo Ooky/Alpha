@@ -20,7 +20,6 @@ public class TextureLoader {
 //==============================================================================
     //Background
     private final Texture backgroundTexture;
-    private final Texture backgroundFirstLevel;
     public static TextureRegion cloud;                  //14
     public static TextureRegion backLevel1;
     //Items
@@ -56,8 +55,6 @@ public class TextureLoader {
 //------------------------------------------------------------------------------
         backgroundTexture = new Texture(Gdx.files.internal("Graphics/Background/BackgroundRegion.png"));
         cloud = new TextureRegion(backgroundTexture, 0, 0, 16, 62);
-        backgroundFirstLevel = new Texture(Gdx.files.internal("Graphics/Background/back.jpg"));
-        backLevel1 = new TextureRegion(backgroundFirstLevel, 0, 0, 1920, 1200);
         
         //Items
         itemList = new Texture(Gdx.files.internal("Graphics/Items/itemList.png"));
@@ -139,9 +136,5 @@ public class TextureLoader {
     
     public TextureRegion getSword() {
         return sword;
-    }
-    
-    public static TextureRegion getBackgroundLevel1() {
-        return backLevel1;
     }
 }
