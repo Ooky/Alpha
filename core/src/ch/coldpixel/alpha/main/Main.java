@@ -139,7 +139,7 @@ public class Main implements Screen {
                         batchDynamic.begin();
                 //------LEFT
                         //Background
-                        actualLevel.drawRegion(false, TextureLoader.getTextureRegion(8), 0, -320, 147, 19, 16, 16, false, 1);
+                        actualLevel.drawRegion(false, TextureLoader.getTextureRegion(80), 1, -55, 1, 1, 1920, 780, false, 1);
                         //drawRegion(false, tl.getBackGround0(), 760, 32, 35, 10, 16, 16, false, false);
                         //Surface
                         Destination destination = new Destination(2320,32,TextureLoader.getTextureRegion(50).getRegionWidth(),TextureLoader.getTextureRegion(50).getRegionHeight(),TextureLoader.getTextureRegion(50));

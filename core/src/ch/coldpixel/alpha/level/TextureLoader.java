@@ -19,32 +19,33 @@ public class TextureLoader {
 //Initialization
 //==============================================================================
     //Background
-    private final Texture backgroundTexture;
-    public static TextureRegion cloud;                  //14
+    private  Texture backgroundTexture;
+    public static TextureRegion cloud;                      //14
     public static TextureRegion backLevel1;
     //Items
     private final Texture itemList;
     private final TextureRegion sword;
     //Terrain
     private final Texture terrain;
-    private  static TextureRegion surface0;               //01
-    private  static TextureRegion surface1;               //02
-    private  static TextureRegion surface2;               //03
-    private  static TextureRegion surfaceToGround0;       //04
-    private  static TextureRegion surfaceToGround1;       //05
-    private  static TextureRegion surfaceToGround2;       //06
-    private  static TextureRegion backSurfaceToGround0;   //07
-    private  static TextureRegion ground0;                //08
-    private  static TextureRegion ground1;                //09
-    private  static TextureRegion ground2;                //10
-    private  static TextureRegion backGround0;            //11
-    private  static TextureRegion stairs0;                //12
-    private  static TextureRegion SpikeTrap0;             //13
+    private  static TextureRegion surface0;                 //01
+    private  static TextureRegion surface1;                 //02
+    private  static TextureRegion surface2;                 //03
+    private  static TextureRegion surfaceToGround0;         //04
+    private  static TextureRegion surfaceToGround1;         //05
+    private  static TextureRegion surfaceToGround2;         //06
+    private  static TextureRegion backSurfaceToGround0;     //07
+    private  static TextureRegion ground0;                  //08
+    private  static TextureRegion ground1;                  //09
+    private  static TextureRegion ground2;                  //10
+    private  static TextureRegion backGround0;              //11
+    private  static TextureRegion stairs0;                  //12
+    private  static TextureRegion SpikeTrap0;               //13
+    private static TextureRegion backGround1;               //80
     //Destinations
     private final Texture destination;                  
-    private  static TextureRegion placeholder1;           //50
+    private  static TextureRegion placeholder1;             //50
     //Just for Collision, not really great, should be change if collision works
-    private  static TextureRegion emptyTexture;           //99
+    private  static TextureRegion emptyTexture;             //99
 
 //==============================================================================
 //Methods
@@ -85,6 +86,9 @@ public class TextureLoader {
         stairs0 = new TextureRegion(terrain, 11, 59, 16, 16);
         //Traps
         SpikeTrap0 = new TextureRegion(terrain, 11, 75, 16, 16);
+        //Backrounds
+        backgroundTexture = new Texture(Gdx.files.internal("Graphics/Background/background1.png"));
+        backGround1 = new TextureRegion(backgroundTexture,0,0,1920,780);
 //------------------------------------------------------------------------------
 //Destination
 //------------------------------------------------------------------------------
@@ -127,6 +131,8 @@ public class TextureLoader {
                  return cloud;
             case 50:
                  return placeholder1;
+            case 80:
+                return backGround1;
             case 99:
                  return emptyTexture;
             default:
