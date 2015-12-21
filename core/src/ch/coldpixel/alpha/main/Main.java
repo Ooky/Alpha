@@ -139,7 +139,7 @@ public class Main implements Screen {
                         batchDynamic.begin();
                 //------LEFT
                         //Background
-                        actualLevel.drawRegion(false, TextureLoader.getTextureRegion(80), 1, -55, 1, 1, 1920, 780, false, 1);
+                        actualLevel.drawRegion(false, TextureLoader.getTextureRegion(80), 1, -55, 2, 1, 1920, 780, false, 1);
                         //drawRegion(false, tl.getBackGround0(), 760, 32, 35, 10, 16, 16, false, false);
                         //Surface
                         Destination destination = new Destination(2320,32,TextureLoader.getTextureRegion(50).getRegionWidth(),TextureLoader.getTextureRegion(50).getRegionHeight(),TextureLoader.getTextureRegion(50));
@@ -156,20 +156,20 @@ public class Main implements Screen {
                         arrSurfaceToGround[0] = TextureLoader.getTextureRegion(4);
                         arrSurfaceToGround[1] = TextureLoader.getTextureRegion(5);
                         arrSurfaceToGround[2] = TextureLoader.getTextureRegion(6);
-                        for (int i = 0; i < arrRandomSurface0.size(); i++) {
+                       /* for (int i = 0; i < arrRandomSurface0.size(); i++) {
                             //Generates surface, based on random generated numbers in arrRandom
                             actualLevel.drawRegion(false, arrSurface[arrRandomSurface0.get(i)], i * 16, 32, 1, 1, 16, 16, false, 1);
-                        }
+                        }*/
                         //->this 2 lines are redudant, the foor loop would be enough IF collision = true
                         //but if you set collision = true, then it bugs, so i draw first a texture to make
                         //sure it collides, then draw my original random texture over it
                         //needs to be fixed
 
                         //Surface to Ground                        
-                        actualLevel.drawRegion(false, TextureLoader.getTextureRegion(99), 0, 28, 560, 1, 1, 1, true, 1);
-                        for (int i = 0; i < arrRandomSurface0.size(); i++) {
+                        //actualLevel.drawRegion(false, TextureLoader.getTextureRegion(99), 0, 28, 560, 1, 1, 1, true, 1);
+                       /* for (int i = 0; i < arrRandomSurface0.size(); i++) {
                             actualLevel.drawRegion(false, arrSurfaceToGround[arrRandomSurface0.get(i)], i * 16, 16, 1, 1, 16, 16, false, 1);
-                        }
+                        }*/
                         //Ground
                         TextureRegion ground;
                         if(actualLevel == level1){
@@ -177,12 +177,19 @@ public class Main implements Screen {
                         }else{
                             ground = TextureLoader.getTextureRegion(9);
                         }
-                        actualLevel.drawRegion(false, ground, 0, 0, 35, 1, 16, 16, false, 1);
-                        actualLevel.drawRegion(false, ground, 0, -16, 35, 1, 16, 16, false, 1);
+                        //Loops The CSVArray to Draw the level
+                        for(int i=0;i<csvArray.size();i++){
+                            String[] iter = csvArray.get(i).split(",");
+                            actualLevel.drawRegion(Boolean.parseBoolean(iter[0]),TextureLoader.getTextureRegion(Integer.parseInt(iter[1])),Integer.parseInt(iter[2]),Integer.parseInt(iter[3]),Integer.parseInt(iter[4]),Integer.parseInt(iter[5]),Integer.parseInt(iter[6]),Integer.parseInt(iter[7]),Integer.parseInt(iter[8])==1?true:false,Integer.parseInt(iter[9]));
+                        }
+                        
+                        
+                      //  actualLevel.drawRegion(false, ground, 0, 0, 35, 1, 16, 16, false, 1);
+                     //   actualLevel.drawRegion(false, ground, 0, -16, 35, 1, 16, 16, false, 1);
                         
                         
                         actualLevel.drawRegion(false, EnemyList.get(0).getEnemyTexture(), (int) EnemyList.get(0).getEnemyX(), (int) EnemyList.get(0).getEnemyY(), 1, 1, 16, 16, false, 1);
-
+/*
                 //------RIGHT
                         actualLevel.drawRegion(false, TextureLoader.getTextureRegion(1), 760, 32, 2, 1, 16, 16, false, 1);
                         actualLevel.drawRegion(false, TextureLoader.getTextureRegion(2), 792, 32, 2, 1, 16, 16, false, 1);
@@ -212,15 +219,18 @@ public class Main implements Screen {
                         actualLevel.drawRegion(false, TextureLoader.getTextureRegion(12), 1400, 64, 16, 2, 16, 16, true, 1);
                         actualLevel.drawRegion(false, TextureLoader.getTextureRegion(12), 1400, 96, 12, 2, 16, 16, true, 1);
                         actualLevel.drawRegion(false, TextureLoader.getTextureRegion(12), 1400, 128, 8, 2, 16, 16, true, 1);
-                        actualLevel.drawRegion(false, TextureLoader.getTextureRegion(12), 1400, 160, 4, 2, 16, 16, true, 1);
-                        for (int i = 0; i < arrRandomSurface1.size(); i++) {
+                        actualLevel.drawRegion(false, TextureLoader.getTextureRegion(12), 1400, 160, 4, 2, 16, 16, true, 1);*/
+                       
+                        
+                        /* for (int i = 0; i < arrRandomSurface1.size(); i++) {
                             //Generates surface, based on random generated numbers in arrRandom
                             actualLevel.drawRegion(false, arrSurface[arrRandomSurface1.get(i)], i * 16 + 1720, 32, 1, 1, 16, 16, false, 1);
                         }
                         //Surface to Ground
                         for (int i = 0; i < arrRandomSurface1.size(); i++) {
                             actualLevel.drawRegion(false, arrSurfaceToGround[arrRandomSurface1.get(i)], i * 16+1720, 16, 1, 1, 16, 16, false, 1);
-                        }
+                        }*/
+                        
                         //Destination
                         //Destination
                         batchDynamic.draw(destination.getDestinationTexture(), destination.getDestinationX(), destination.getDestinationY());
